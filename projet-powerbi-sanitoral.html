@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tableau de bord Power BI — Sanitoral — Portfolio Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">zied-belhocine.github.io</a>
+    <nav>
+      <a href="index.html#projets">Projets</a>
+      <a href="veille.html">Veille</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="fiche-header wrap">
+    <a class="back" href="index.html#projets">← Retour aux projets</a>
+    <h1>Tableau de bord Power BI — Suivi de projets (Sanitoral)</h1>
+    <div class="fiche-meta">
+      <span class="tag">Power BI</span>
+      <span class="tag">DAX</span>
+      <span class="tag">Power Query</span>
+      <span class="tag">Modélisation de données</span>
+      <span class="tag">Storytelling</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="fiche-visual">
+      [Visuel clé du projet : page "Résumé livrables" ou "Résumé durée" du dashboard,
+      ou schéma de la technique de l'entonnoir utilisée en soutenance]
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <section class="fiche-section">
+      <span class="label">01 — Contexte / besoin métier</span>
+      <h2>De quoi s'agit-il ?</h2>
+      <p>
+        Mission réalisée en tant que consultant Data Analyst chez ESN Data, déployé chez le
+        client Sanitoral (fabricant international de soins bucco-dentaires). La cheffe de
+        projet PMO avait besoin d'un tableau de bord pour suivre l'avancement des projets et
+        leurs coûts, identifier les retards, et permettre à 3 niveaux de directeurs (Général,
+        Régional, Pays) de piloter les actions correctives — avec une mise à jour
+        hebdomadaire à réaliser en autonomie par les équipes, sans intervention technique de
+        ma part après livraison.
+      </p>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">02 — Données</span>
+      <h2>Sur quoi je me suis appuyé</h2>
+      <ul>
+        <li><strong>Source :</strong> export du logiciel de gestion de projets de Sanitoral, couvrant des projets menés entre 2018 et début 2022, avec dictionnaire de données fourni.</li>
+        <li><strong>Préparation :</strong> nettoyage entièrement automatisé via Power Query Editor pour permettre les mises à jour hebdomadaires en autonomie par les équipes, sans reprise manuelle.</li>
+        <li><strong>Modélisation :</strong> simplification du modèle relationnel de 7 tables et 9 relations à seulement 4 tables et 3 relations, pour fiabiliser les calculs croisés et faciliter la maintenance.</li>
+      </ul>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">03 — Démarche</span>
+      <h2>Comment j'ai procédé</h2>
+      <ul>
+        <li>Cadrage du besoin avant toute construction technique : élaboration d'un Product Strategy Canvas formalisant les user stories, validé par la commanditaire avant de commencer le développement — pour éviter l'écueil classique de se précipiter dans l'outil sans avoir compris le besoin.</li>
+        <li>Réalisation d'un mockup ("5 pages pour les dominer tous") pour cadrer la structure finale : une page Alertes globales, une page Coûts, une page Durée, une page Livrables, une page Détail projet.</li>
+        <li>Construction des mesures via DAX pour calculer automatiquement les écarts (coût, durée, livrables) et déclencher des indicateurs d'alerte visuels.</li>
+        <li>Mise en place de rôles Power BI pour que chaque niveau de directeur (Général, Régional, Pays) accède uniquement aux informations le concernant, sans multiplier les pages.</li>
+        <li>Application d'une "technique de l'entonnoir" pour le storytelling final : partir d'une alerte globale au niveau Directeur Général, puis descendre progressivement jusqu'au projet précis en cause au niveau Directeur Pays.</li>
+      </ul>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">04 — Résultats &amp; impact</span>
+      <h2>Ce que ça a produit</h2>
+      <p>
+        Dashboard livré sur 104 projets suivis dans 52 pays, avec un taux d'achèvement
+        global des livrables de 89,51 % (7 819 livrables produits sur 8 735 planifiés) et
+        9 alertes actives sur les livrables.
+      </p>
+      <p>
+        La démonstration du storytelling en entonnoir a permis d'identifier concrètement que
+        la région Central/Eastern Europe-Middle East-Africa concentre le plus d'alertes coût
+        (12 pays), avec un dépassement budgétaire nettement plus marqué sur les projets
+        Marketing (+9,60 % de dérive) que sur les projets IT (+0,66 %). En descendant jusqu'au
+        niveau pays, l'analyse pointe précisément la Macédoine, où le projet 46 (Marketing)
+        affiche un dépassement de 259 100 € (+34,55 %) par rapport au budget initial.
+      </p>
+      <p>
+        Point positif identifié à l'inverse : la durée des projets est globalement respectée
+        voire meilleure que prévu sur l'ensemble des phases (écarts négatifs partout, jusqu'à
+        -22 % sur certaines phases marketing) — une bonne pratique à maintenir plutôt qu'un
+        axe de correction.
+      </p>
+      <p>
+        <strong>Axe stratégique proposé à la direction :</strong> concentrer l'attention sur
+        le contrôle budgétaire des projets Marketing dans la région Central/Eastern
+        Europe-Middle East-Africa, en s'appuyant sur les cas comme la Macédoine pour
+        comprendre les causes de dérive avant qu'elles ne se généralisent.
+      </p>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">05 — Limites &amp; pistes</span>
+      <h2>Ce que je ferais différemment</h2>
+      <p>
+        Avec le recul, le tableau de bord est trop exhaustif : chaque page cherche à tout
+        montrer (KPIs, graphiques, tableaux détaillés, cartes) au détriment de l'ergonomie,
+        du design et de la lisibilité immédiate pour des directeurs pressés. Une prochaine
+        itération viserait à alléger chaque page — moins d'éléments par écran, une hiérarchie
+        visuelle plus marquée entre l'information clé et le détail secondaire — pour rendre
+        le dashboard plus digeste au premier coup d'œil, quitte à répartir certains éléments
+        sur des pages supplémentaires plutôt que de tout concentrer.
+      </p>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

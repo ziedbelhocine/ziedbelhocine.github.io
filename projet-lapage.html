@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analysez les ventes d'une librairie — Portfolio Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">zied-belhocine.github.io</a>
+    <nav>
+      <a href="index.html#projets">Projets</a>
+      <a href="veille.html">Veille</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="fiche-header wrap">
+    <a class="back" href="index.html#projets">← Retour aux projets</a>
+    <h1>Analysez les ventes d'une librairie — Lapage (indicateurs &amp; comportement client)</h1>
+    <div class="fiche-meta">
+      <span class="tag">Python</span>
+      <span class="tag">Statistiques inférentielles</span>
+      <span class="tag">Spearman</span>
+      <span class="tag">ANOVA</span>
+      <span class="tag">Chi²</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="fiche-visual">
+      [Visuel clé du projet : graphique du CA avec moyenne mobile, ou visualisation de la
+      relation âge / catégorie de livres achetés]
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <section class="fiche-section">
+      <span class="label">01 — Contexte / besoin métier</span>
+      <h2>De quoi s'agit-il ?</h2>
+      <p>
+        Mission réalisée pour Lapage, librairie historiquement physique ayant ouvert son site
+        de vente en ligne il y a 2 ans. La responsable Marketing (Annabelle) et la Business
+        Intelligence Analyst (Julie) avaient besoin d'un état des lieux complet de l'activité
+        pour orienter les décisions à venir : évolutions d'offres, ajustements de prix,
+        ciblage clientèle. L'analyse devait couvrir deux volets — les indicateurs de vente
+        globaux, et une analyse fine du comportement client en ligne, comparable à la
+        connaissance déjà acquise sur les points de vente physiques. Restitution attendue en
+        15 minutes devant le comité de direction (CODIR), avec une posture de conseil
+        stratégique plutôt qu'un rapport technique.
+      </p>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">02 — Données</span>
+      <h2>Sur quoi je me suis appuyé</h2>
+      <ul>
+        <li><strong>Source :</strong> 3 fichiers fournis par l'entreprise — clients, produits, transactions — déjà nettoyés en amont, mais avec vérification et traitement complémentaire des valeurs manquantes et doublons de mon côté.</li>
+        <li><strong>Volumétrie :</strong> historique des ventes en ligne depuis l'ouverture du site, pour un chiffre d'affaires cumulé de 11,8 M€.</li>
+        <li><strong>Limite connue dès le départ :</strong> les données clients ne couvrent que la période depuis 2021, insuffisante pour capter des tendances de comportement sur le très long terme.</li>
+      </ul>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">03 — Démarche</span>
+      <h2>Comment j'ai procédé</h2>
+      <ul>
+        <li>Calcul des indicateurs clés de vente (CA total, répartition par catégorie de produits, top/flop produits) et suivi du chiffre d'affaires via une moyenne mobile mensuelle pour lisser les variations et faire ressortir la tendance de fond.</li>
+        <li>Segmentation de la clientèle : détection d'une clientèle B2B minoritaire en nombre (4 clients) mais représentant à elle seule 7,43 % du CA total (~900 k€), avec un comportement d'achat régulier et diversifié — un profil suffisamment atypique pour biaiser les analyses si non isolé.</li>
+        <li>Analyse de corrélation systématique entre profil client (âge, genre) et comportement d'achat (dépense totale, fréquence, taille du panier, catégories achetées), avec sélection rigoureuse du test statistique adapté à chaque cas :
+          <ul>
+            <li>Test de normalité (Shapiro-Wilk) systématique avant de choisir entre Pearson et Spearman.</li>
+            <li>Corrélation de Spearman (non paramétrique) pour âge vs dépenses, âge vs fréquence d'achat, âge vs taille de panier — les variables ne suivant pas une loi normale.</li>
+            <li>ANOVA pour comparer les moyennes de dépense, fréquence et panier entre catégories d'âge.</li>
+            <li>Test du Chi² pour la relation entre âge et catégorie de produits achetés, et entre genre et catégories de livres.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">04 — Résultats &amp; impact</span>
+      <h2>Ce que ça a produit</h2>
+      <ul>
+        <li>Chiffre d'affaires cumulé de 11,8 M€ depuis l'ouverture du site, avec une tendance suivie via moyenne mobile mensuelle.</li>
+        <li>Le genre n'a pas d'impact pratique sur les catégories de livres achetées : une relation existe statistiquement, mais à une échelle trop faible pour être exploitable commercialement.</li>
+        <li>Plus les clients sont âgés, moins ils dépensent en moyenne — mais la relation entre âge et fréquence d'achat est plus complexe qu'un simple lien linéaire.</li>
+        <li>Le test du Chi² a confirmé une dépendance très forte et statistiquement significative (p &lt; 0,05) entre l'âge des clients et la catégorie de livres achetée, validant des préférences marquées par tranche d'âge.</li>
+        <li>Deux tranches d'âge se distinguent par un panier moyen nettement supérieur aux autres.</li>
+        <li>Recommandations livrées au CODIR, hiérarchisées court/moyen/long terme : fidéliser en priorité les 19-50 ans (cœur de clientèle), structurer une offre dédiée aux clients B2B identifiés, développer la saisonnalité, stimuler la fréquence d'achat des plus jeunes via des offres ciblées sur leurs catégories préférées, et améliorer l'accessibilité du site pour augmenter le panier moyen des clients plus âgés.</li>
+      </ul>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">05 — Limites &amp; pistes</span>
+      <h2>Ce que je ferais différemment</h2>
+      <ul>
+        <li>Les données clients ne couvrent que la période depuis 2021, ce qui limite la capacité à détecter des tendances ou changements de comportement sur plusieurs années.</li>
+        <li>Malgré un nettoyage soigné (valeurs manquantes, doublons), un risque d'erreurs résiduelles subsiste et peut affecter marginalement les résultats des tests.</li>
+        <li>La présence de clients B2B aux volumes d'achat atypiques peut biaiser les tests de corrélation — je ne peux pas garantir avoir détecté 100 % de ces profils dans le jeu de données.</li>
+        <li>Piste identifiée : la marge par produit n'était pas disponible dans les données fournies, alors qu'elle serait une information cruciale pour compléter l'analyse de performance au-delà du seul chiffre d'affaires.</li>
+      </ul>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

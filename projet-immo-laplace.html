@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base de données immobilière — DATAImmo — Portfolio Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">zied-belhocine.github.io</a>
+    <nav>
+      <a href="index.html#projets">Projets</a>
+      <a href="veille.html">Veille</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="fiche-header wrap">
+    <a class="back" href="index.html#projets">← Retour aux projets</a>
+    <h1>Base de données immobilière — DATAImmo (Laplace Immo)</h1>
+    <div class="fiche-meta">
+      <span class="tag">SQL</span>
+      <span class="tag">Modélisation 3NF</span>
+      <span class="tag">Databricks</span>
+      <span class="tag">Dictionnaire de données</span>
+      <span class="tag">RGPD</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="fiche-visual">
+      [Visuel clé du projet : schéma relationnel normalisé (3NF), ou capture du workspace
+      Databricks avec les tables chargées]
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <section class="fiche-section">
+      <span class="label">01 — Contexte / besoin métier</span>
+      <h2>De quoi s'agit-il ?</h2>
+      <p>
+        Mission réalisée pour Laplace Immo, réseau national d'agences immobilières, dans le
+        cadre du projet stratégique interne "DATAImmo" piloté par la CTO. L'objectif : faire
+        évoluer la base de données collectant les transactions immobilières et foncières
+        françaises pour, à terme, construire un modèle de prévision des prix de vente et
+        mieux accompagner les agences régionales. Ma mission couvrait deux volets : la
+        conception (dictionnaire de données, schéma relationnel normalisé) et
+        l'implémentation (hébergement Cloud sur Databricks, requêtes SQL d'analyse).
+      </p>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">02 — Données</span>
+      <h2>Sur quoi je me suis appuyé</h2>
+      <ul>
+        <li><strong>Sources :</strong> 3 jeux de données à intégrer — les Demandes de valeurs foncières (DVF, open data), le référentiel géographique français de data.gouv (régions, départements, communes), et les données de recensement de population de l'INSEE.</li>
+        <li><strong>Volumétrie :</strong> 34 169 transactions immobilières, réparties sur ~35 000 communes, 109 départements et 19 régions.</li>
+        <li><strong>Contrainte RGPD :</strong> le nom de l'acquéreur, présent dans les données sources, a été identifié comme donnée personnelle à supprimer avant tout hébergement Cloud — traitement automatisé via Power Query.</li>
+        <li><strong>Clé technique notable :</strong> absence de code département direct dans les données data.gouv/INSEE, et un code département seul insuffisant comme clé unique (plusieurs communes peuvent partager un même code postal) — nécessitant la construction d'une clé composite <code>id_codedep_codecommune</code>.</li>
+      </ul>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">03 — Démarche</span>
+      <h2>Comment j'ai procédé</h2>
+      <ul>
+        <li>Élaboration d'un dictionnaire de données complet pour les 3 sources (DVF, référentiel géographique, données communes), avec pour chaque variable : code, signification, type, longueur, nature et règle de gestion — travail préalable indispensable avant toute modélisation.</li>
+        <li>Conception du schéma relationnel normalisé en 3ᵉ forme normale (3NF), avec identification rigoureuse des clés primaires, clés étrangères et cardinalités pour chaque table (région, département, commune, bien, vente), en évitant les redondances (ex. entre département et code département).</li>
+        <li>Nettoyage et mise en conformité RGPD des fichiers CSV avant import, vérification des doublons et des clés.</li>
+        <li>Hébergement et création des tables sur Databricks (remplaçant une solution locale de type SQLite), avec vérification de l'intégrité par comparaison du nombre de lignes entre fichiers sources et tables importées.</li>
+        <li>Rédaction de 12 requêtes SQL avec jointures multiples, agrégations et sous-requêtes pour répondre aux besoins d'analyse du marché immobilier, avec alias systématiques pour la lisibilité.</li>
+      </ul>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">04 — Résultats &amp; impact</span>
+      <h2>Ce que ça a produit</h2>
+      <p>
+        Base de données opérationnelle sur Databricks, avec un jeu de 12 requêtes SQL livrant
+        des indicateurs directement exploitables par les agences, par exemple :
+      </p>
+      <ul>
+        <li>31 378 appartements vendus au 1ᵉʳ semestre 2020, dont 13 995 rien qu'en Île-de-France (44 % du total national).</li>
+        <li>Paris est de loin le département le plus cher (12 052 €/m²), suivi des Hauts-de-Seine (7 219 €/m²) et du Val-de-Marne (5 343 €/m²) — un écart de plus de 60 % entre les deux premiers départements du classement.</li>
+        <li>Prix moyen du m² pour une maison en Île-de-France : 3 745 €.</li>
+        <li>Hausse de 3,68 % du nombre de ventes entre le 1ᵉʳ et le 2ᵉ trimestre 2020.</li>
+        <li>48 communes ont dépassé les 50 transactions sur le seul premier trimestre 2020, avec Paris 17ᵉ (228 ventes), Paris 15ᵉ (215) et Paris 18ᵉ (209) en tête.</li>
+      </ul>
+      <p>
+        Ces requêtes, conservées et rejouées en direct lors de la soutenance, donnent à
+        Laplace Immo une base solide et interrogeable pour alimenter ses futurs travaux de
+        modélisation prédictive des prix.
+      </p>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">05 — Limites &amp; pistes</span>
+      <h2>Ce que je ferais différemment</h2>
+      <p>
+        Le contrôle de la qualité des données (doublons, valeurs manquantes, conformité RGPD)
+        a été fait de façon largement manuelle lors de cette mission. Une évolution naturelle
+        serait d'automatiser ces vérifications via des scripts Python exécutés à chaque
+        import — contrôle systématique des doublons, des valeurs aberrantes ou manquantes, et
+        de la bonne suppression des données personnelles — plutôt que de les revérifier à la
+        main à chaque nouvelle livraison de données. Cela sécuriserait le pipeline dans la
+        durée, notamment si la fréquence d'alimentation de la base augmente au-delà d'un
+        import ponctuel.
+      </p>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

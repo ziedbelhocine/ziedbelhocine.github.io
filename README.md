@@ -19,6 +19,7 @@ Python · SQL · Power BI · Excel · Git/GitHub
 - `projet-*.html` — fiches détaillées par projet
 - `veille.html` — veille métier et technologique
 - `style.css` — feuille de style partagée
+- `.nojekyll` — désactive le traitement Jekyll par défaut de GitHub Pages
 
 ---
 

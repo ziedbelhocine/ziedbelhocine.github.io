@@ -81,7 +81,7 @@
       </p>
       <ul>
         <li>Déclaration des sources de données (étudiants et INSEE) dans des fichiers de configuration <code>sources.yml</code>, avec documentation complète de chaque colonne.</li>
-        <li>Construction de modèles en couches (staging → intermediate → marts) pour nettoyer, harmoniser et agréger les données, avec des règles explicites (filtrage des années hors périmètre, valeurs de genre manquantes traitées comme "Unknown" plutôt qu'exclues).</li>
+        <li>Construction de modèles en couches (staging → intermediate → marts) pour nettoyer, harmoniser et agréger les données. Chaque modèle DBT est écrit en SQL et compilé en requêtes exécutées directement sur Snowflake, avec des règles explicites (filtrage des années hors périmètre, valeurs de genre manquantes traitées comme "Unknown" plutôt qu'exclues).</li>
         <li>Mise en place de tests DBT automatisés à chaque étape : unicité des clés, cohérence des pourcentages calculés, valeurs autorisées sur les catégories (âge, genre, région).</li>
         <li>Calcul d'un indicateur d'écart (<code>delta_pct</code>) entre la répartition des étudiants et celle de la population INSEE, pour rendre les résultats immédiatement interprétables par un public non technique.</li>
         <li>Documentation du pipeline pour le rendre traçable et reproductible par l'équipe, sans dépendre de moi pour le relancer.</li>
