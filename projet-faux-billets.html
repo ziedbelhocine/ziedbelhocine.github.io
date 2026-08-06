@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Détectez des faux billets — Portfolio Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">zied-belhocine.github.io</a>
+    <nav>
+      <a href="index.html#projets">Projets</a>
+      <a href="veille.html">Veille</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="fiche-header wrap">
+    <a class="back" href="index.html#projets">← Retour aux projets</a>
+    <h1>Détectez des faux billets — Classification par Machine Learning</h1>
+    <div class="fiche-meta">
+      <span class="tag">Python</span>
+      <span class="tag">Scikit-learn</span>
+      <span class="tag">Random Forest</span>
+      <span class="tag">Classification</span>
+      <span class="tag">GridSearchCV</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- Remplacer par la matrice de confusion ou le graphique d'importance des variables du Random Forest -->
+    <div class="fiche-visual">
+      [Visuel clé du projet : matrice de confusion du modèle final, ou graphique
+      d'importance des variables (feature importance) du Random Forest]
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <section class="fiche-section">
+      <span class="label">01 — Contexte / besoin métier</span>
+      <h2>De quoi s'agit-il ?</h2>
+      <p>
+        Mission réalisée pour l'ONCFM (Organisation nationale de lutte contre le
+        faux-monnayage), en tant que data analyst senior. L'organisation
+        souhaitait doter ses équipes d'une application de machine learning
+        capable de prédire, à partir des dimensions scannées d'un billet
+        (longueur, hauteur, marges, diagonale), s'il s'agit d'un vrai ou d'un
+        faux billet en euros. La commande était double : un notebook d'analyse
+        et de comparaison de modèles, et une application fonctionnelle livrée
+        en script Python autonome, testée en direct avec la commanditaire.
+      </p>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">02 — Données</span>
+      <h2>Sur quoi je me suis appuyé</h2>
+      <ul>
+        <li><strong>Source :</strong> 1 500 billets scannés par l'ONCFM (1 000 vrais, 500 faux), avec 6 mesures géométriques par billet (diagonale, hauteurs gauche/droite, marges basse/haute, longueur).</li>
+        <li><strong>Qualité :</strong> 37 valeurs manquantes sur <code>margin_low</code> (2,5 % du jeu), supprimées après analyse — la perte ne déséquilibrait pas la répartition vrais/faux (passage de 66,7/33,3 % à 66,4/33,6 %) et aucune variable n'était assez corrélée à <code>margin_low</code> pour l'imputer sans risque.</li>
+        <li><strong>Limite structurelle :</strong> aucune variable seule ne sépare vrais et faux billets (chevauchement important sur tous les boxplots) — la distinction n'est possible qu'en croisant plusieurs dimensions, ce qui justifie le recours au machine learning plutôt qu'à un seuil simple.</li>
+      </ul>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">03 — Démarche</span>
+      <h2>Comment j'ai procédé</h2>
+      <ul>
+        <li>Nettoyage des données et détection d'outliers (IQR + Z-score) : nombreux outliers repérés, mais volontairement conservés car potentiellement révélateurs de faux billets plutôt qu'à exclure.</li>
+        <li>Test de 4 modèles recommandés par l'agence EMV : K-means, régression logistique, KNN, Random Forest — plus un test bonus avec Gradient Boosting.</li>
+        <li>Pour chaque modèle, validation de la robustesse sur 200 échantillons d'entraînement/test différents (et non un seul découpage), afin d'obtenir un score fiable plutôt qu'un résultat de circonstance.</li>
+        <li>Optimisation des hyperparamètres du Random Forest par recherche en grille (<code>GridSearchCV</code>, validation croisée à 5 blocs).</li>
+        <li>Réduction du modèle final à 3 variables (<code>margin_low</code>, <code>margin_up</code>, <code>length</code>) après avoir vérifié qu'elles suffisaient à obtenir la même performance que les 6 variables complètes — modèle plus simple, donc plus robuste et plus rapide.</li>
+        <li>Analyse croisée des erreurs entre les 3 meilleurs modèles pour vérifier s'ils se trompaient sur les mêmes billets.</li>
+        <li>Livraison finale : script d'entraînement, modèle sauvegardé (<code>model_rf.joblib</code>), et deux scripts d'utilisation — l'un pour tester un billet en saisissant ses mesures à la main, l'autre pour tester un fichier entier de billets scannés.</li>
+      </ul>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">04 — Résultats &amp; impact</span>
+      <h2>Ce que ça a produit</h2>
+      <p>
+        Comparaison des 3 modèles les plus robustes sur 200 échantillons :
+      </p>
+      <table class="veille-table">
+        <thead>
+          <tr>
+            <th>Modèle</th>
+            <th>ROC-AUC moyen (test)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Random Forest</td><td>le plus élevé et le plus stable</td></tr>
+          <tr><td>Régression logistique</td><td>~99,9 %</td></tr>
+          <tr><td>KNN (k=3)</td><td>~99,2 %</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Le <strong>Random Forest</strong> a été retenu comme modèle final
+        (100 arbres, profondeur max 7, <code>min_samples_split</code>=4),
+        entraîné sur l'ensemble des 1 463 billets nettoyés à partir des 3
+        variables les plus discriminantes. L'analyse d'importance des
+        variables confirme que la marge basse et la longueur sont les critères
+        les plus déterminants pour repérer un faux billet — une information
+        directement exploitable par les équipes de terrain.
+      </p>
+      <p>
+        Livrable final : une application en ligne de commande fonctionnelle,
+        testée avec la commanditaire, capable d'analyser soit un billet saisi
+        manuellement, soit un fichier CSV de plusieurs billets, avec un score
+        de confiance associé à chaque prédiction.
+      </p>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">05 — Limites &amp; pistes</span>
+      <h2>Ce que je ferais différemment</h2>
+      <ul>
+        <li>Le jeu de données reste modeste (1 500 billets) pour un modèle destiné à un usage à grande échelle — un enrichissement continu du jeu d'entraînement avec de nouveaux billets scannés en production permettrait de fiabiliser encore le modèle dans le temps.</li>
+        <li>Les 3 modèles les plus performants (régression logistique, KNN, Random Forest) se trompent souvent sur les <strong>mêmes</strong> billets — signe que la difficulté vient de cas limites intrinsèquement ambigus dans les données, pas d'une faiblesse propre à un algorithme. Une piste serait d'examiner spécifiquement ces billets mal classés pour comprendre ce qui les rend atypiques.</li>
+        <li>L'application actuelle est en ligne de commande (CLI) — l'évaluateur en soutenance a suggéré d'utiliser Streamlit pour proposer une interface utilisateur web, plus accessible aux équipes terrain qu'un script CLI au quotidien. C'est la prochaine évolution naturelle de l'outil.</li>
+      </ul>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
