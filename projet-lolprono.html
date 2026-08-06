@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lolprono — Portfolio Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">zied-belhocine.github.io</a>
+    <nav>
+      <a href="index.html#projets">Projets</a>
+      <a href="veille.html">Veille</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="fiche-header wrap">
+    <a class="back" href="index.html#projets">← Retour aux projets</a>
+    <h1>Lolprono — Webapp de pronostics League of Legends</h1>
+    <div class="fiche-meta">
+      <span class="tag">Python</span>
+      <span class="tag">Flask</span>
+      <span class="tag">SQLite</span>
+      <span class="tag">Git</span>
+      <span class="tag">Travail d'équipe</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- Remplacer par une capture d'écran de la page classement ou du tableau des pronos -->
+    <div class="fiche-visual">
+      [Visuel clé du projet : capture d'écran de la page "Classement" ou du
+      tableau "Voir les pronos des potos"]
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <section class="fiche-section">
+      <span class="label">01 — Contexte / besoin métier</span>
+      <h2>De quoi s'agit-il ?</h2>
+      <p>
+        Projet réalisé en équipe (3 personnes ou plus), né d'une envie simple :
+        proposer à un groupe d'amis un outil fiable de pronostics sur les matchs
+        compétitifs de League of Legends, à la manière d'un "mon petit prono".
+        L'application permet de s'inscrire, de suivre plusieurs compétitions, de
+        pronostiquer les résultats jusqu'au début de chaque match, et de comparer
+        son classement à celui des autres joueurs. Contrairement à un projet de
+        formation classique, celui-ci a été conçu pour un usage réel — il est
+        aujourd'hui utilisé régulièrement par le groupe d'amis pour lequel il a
+        été créé.
+      </p>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">02 — Données</span>
+      <h2>Sur quoi je me suis appuyé</h2>
+      <ul>
+        <li><strong>Source :</strong> données de pronostics saisies par les utilisateurs eux-mêmes (pas de données externes), stockées dans une base SQLite.</li>
+        <li><strong>Structure :</strong> utilisateurs, compétitions suivies, pronostics associés à chaque match, résultats réels des matchs.</li>
+        <li><strong>Contrainte spécifique :</strong> les pronostics doivent être verrouillés à l'heure de début du match — la donnée doit donc rester temporellement cohérente (impossible de modifier un prono après coup).</li>
+      </ul>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">03 — Démarche</span>
+      <h2>Comment j'ai procédé</h2>
+      <p>
+        Travail réparti en équipe sur les différentes pages de l'application.
+        Mon périmètre :
+      </p>
+      <ul>
+        <li><strong>Page "Pronos"</strong> — mise en forme de l'interface et développement de la fonction de récupération des pronostics de l'utilisateur.</li>
+        <li><strong>Page "Classement"</strong> — mise en page et développement de la fonction de calcul des points par utilisateur sur une compétition.</li>
+        <li><strong>Page "Voir les pronos des potos"</strong> — mise en page et calcul du tableau comparatif des points entre les membres du groupe.</li>
+      </ul>
+      <p>
+        Stack technique commune à l'équipe : Python/Flask côté serveur, SQLite
+        pour la persistance, tests automatisés avec pytest, déploiement sur un
+        serveur distant.
+      </p>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">04 — Résultats &amp; impact</span>
+      <h2>Ce que ça a produit</h2>
+      <p>
+        L'application est en usage régulier par le groupe d'amis pour lequel
+        elle a été conçue, sur plusieurs compétitions suivies. Les fonctions de
+        classement et de comparaison que j'ai développées sont au cœur de
+        l'usage réel de l'app : c'est ce qui crée la dynamique de "compétition
+        entre potes" recherchée au départ.
+      </p>
+    </section>
+
+    <section class="fiche-section">
+      <span class="label">05 — Limites &amp; pistes</span>
+      <h2>Ce que je ferais différemment</h2>
+      <p>
+        Si je devais me replonger dans ce projet, je chercherais à améliorer 
+        la récupération des données des matchs. En effet, l'API qui est utilisée 
+        n'est pas fiable et a été plusieurs fois responsable de doublons dans 
+        le calendrier. <br></br>
+      D'autre part, je pourrais également revoir le code python produit pour le rendre
+      plus lisible et performant.
+      </p>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
