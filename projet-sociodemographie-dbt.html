@@ -35,13 +35,18 @@
     </div>
   </div>
 
-  <div class="wrap">
-    <!-- Remplacer par une capture d'écran du DAG DBT ou d'un graphique du notebook graphs.ipynb -->
-    <div class="fiche-visual">
-      [Visuel clé du projet : DAG du pipeline DBT (slide 13 de la présentation),
-      ou un des graphiques du notebook graphs.ipynb]
-    </div>
+<style>
+  .fiche-visual img {
+    max-width: 100%; 
+    height: auto;  
+  }
+</style>
+
+<div class="wrap">
+  <div class="fiche-visual">
+    <img src="static/dbt.png" alt="Capture d'écran de l'application dbt" />
   </div>
+</div>
 
   <div class="wrap">
 
@@ -66,8 +71,7 @@
       <ul>
         <li><strong>Source interne :</strong> données d'inscription des étudiants (identifiant, tranche d'âge, genre déclaré, région, année de début de parcours), chargées dans Snowflake.</li>
         <li><strong>Source externe :</strong> données de population de l'INSEE (répartition par âge, genre et région), intégrées pour comparer le profil des étudiants à celui de la population française.</li>
-        <li><strong>Contrainte majeure :</strong> conformité RGPD dès la phase de transformation — anonymisation de l'identifiant étudiant en amont des traitements.</li>
-        <li><strong>Qualité :</strong> une part significative des genres était déclarée "Unknown" sur les premières années (jusqu'à 41 % en 2022), en nette amélioration depuis (6,7 % en 2025). Les deux sources utilisaient des découpages régionaux légèrement différents, harmonisés lors du nettoyage (ex. régroupement des DROM).</li>
+        <li><strong>Contrainte majeure :</strong> Il fallait trouver des données comparables avec celles de la plateforme sur le site de l'INSEE mais pour l'ensemble de la population française.</li>
       </ul>
     </section>
 
@@ -114,14 +118,8 @@
     <section class="fiche-section">
       <span class="label">05 — Limites &amp; pistes</span>
       <h2>Ce que je ferais différemment</h2>
-      <ul>
-        <li>Les régions DROM et Centre-Val de Loire présentent des écarts non calculables pour certaines années (données INSEE manquantes sur ces périmètres) — la table le signale plutôt que d'afficher une valeur erronée, mais l'analyse reste incomplète sur ces zones.</li>
-        <li>La catégorie "Unknown" en genre, bien qu'en forte baisse, biaisait les comparaisons sur les premières années : les deltas de genre sur 2022-2023 sont à interpréter avec prudence.</li>
-        <li>Le RGPD est respecté en amont via l'anonymisation de l'identifiant étudiant, mais je n'ai pas eu à traiter de données nominatives directement — une vraie mise en situation RGPD aurait aussi impliqué des règles de conservation/purge, que le projet ne couvrait pas.</li>
-        <li>Piste d'évolution : croiser ces tendances démographiques avec le taux de réussite du parcours, pour voir si elles corrèlent avec les résultats pédagogiques et pas seulement avec les inscriptions.</li>
-      </ul>
+        <p>Je pourrais essayer de croiser les tendances démographiques avec le taux de réussite du parcours, pour voir si elles corrèlent avec les résultats pédagogiques et pas seulement avec les inscriptions.</p>
     </section>
-
   </div>
 
 </main>

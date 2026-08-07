@@ -35,13 +35,18 @@
     </div>
   </div>
 
-  <div class="wrap">
-    <!-- Remplacer par une capture d'écran de la page classement ou du tableau des pronos -->
-    <div class="fiche-visual">
-      [Visuel clé du projet : capture d'écran de la page "Classement" ou du
-      tableau "Voir les pronos des potos"]
-    </div>
+<style>
+  .fiche-visual img {
+    max-width: 100%; 
+    height: auto;  
+  }
+</style>
+
+<div class="wrap">
+  <div class="fiche-visual">
+    <img src="static/lolprono.png" alt="Capture d'écran de l'application Lolprono" />
   </div>
+</div>
 
   <div class="wrap">
 
@@ -63,12 +68,15 @@
 
     <section class="fiche-section">
       <span class="label">02 — Données</span>
-      <h2>Sur quoi je me suis appuyé</h2>
-      <ul>
-        <li><strong>Source :</strong> données de pronostics saisies par les utilisateurs eux-mêmes (pas de données externes), stockées dans une base SQLite.</li>
-        <li><strong>Structure :</strong> utilisateurs, compétitions suivies, pronostics associés à chaque match, résultats réels des matchs.</li>
-        <li><strong>Contrainte spécifique :</strong> les pronostics doivent être verrouillés à l'heure de début du match — la donnée doit donc rester temporellement cohérente (impossible de modifier un prono après coup).</li>
-      </ul>
+      <h2>Quelles données ?</h2>
+      <p>
+        Je n'ai pas eu à manipuler de données externes pour ce projet, puisque les
+        informations sur les matchs et les compétitions étaient la partie d'un coauteur du projet.
+        J'avais donc à collecter des données grâce à des formulaires sur une page pronos 
+        et à les stocker dans une base de données SQLite. Ensuite, avec ces données, j'ai pu 
+        calculer les points de chaque utilisateur et les afficher sur la page classement.
+      </p>
+
     </section>
 
     <section class="fiche-section">
@@ -98,7 +106,12 @@
         elle a été conçue, sur plusieurs compétitions suivies. Les fonctions de
         classement et de comparaison que j'ai développées sont au cœur de
         l'usage réel de l'app : c'est ce qui crée la dynamique de "compétition
-        entre potes" recherchée au départ.
+        entre potes" recherchée au départ. 
+<br><br>
+        D'autre part, les retours des utilisateurs ont rendus ce projet vraiment vivant
+        et m'ont permis de me confronter à des problématiques réelles de développement.
+        J'ai dû corriger des bugs, améliorer l'ergonomie et la lisibilité de certaines pages, 
+        et proposer des améliorations pour les prochaines versions.
       </p>
     </section>
 
@@ -106,9 +119,10 @@
       <span class="label">05 — Limites &amp; pistes</span>
       <h2>Ce que je ferais différemment</h2>
       <p>
-        [À compléter selon ton retour d'expérience réel — par exemple : gestion
-        des égalités dans le classement, scalabilité si le groupe grandit,
-        absence de notifications avant le verrouillage d'un prono, etc.]
+        Si je devais me replonger dans ce projet, je chercherais un autre moyen de récupérer 
+        les données des matchs et des compétitions. En effet, l'API utilisée aujourd'hui a donné
+        lieu à des doublons dans les matchs récoltés ce qui a nui à l'expérience utilisateur. 
+        Cela me permettrait d'explorer d'autres outils et d'améliorer la fiabilité de l'application.
       </p>
     </section>
 

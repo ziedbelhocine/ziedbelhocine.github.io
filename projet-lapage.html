@@ -35,12 +35,18 @@
     </div>
   </div>
 
-  <div class="wrap">
-    <div class="fiche-visual">
-      [Visuel clé du projet : graphique du CA avec moyenne mobile, ou visualisation de la
-      relation âge / catégorie de livres achetés]
-    </div>
+<style>
+  .fiche-visual img {
+    max-width: 100%; 
+    height: auto;  
+  }
+</style>
+
+<div class="wrap">
+  <div class="fiche-visual">
+    <img src="static/lapage.png" alt="Capture d'écran de l'application Lapage" />
   </div>
+</div>
 
   <div class="wrap">
 
@@ -103,12 +109,10 @@
     <section class="fiche-section">
       <span class="label">05 — Limites &amp; pistes</span>
       <h2>Ce que je ferais différemment</h2>
-      <ul>
-        <li>Les données clients ne couvrent que la période depuis 2021, ce qui limite la capacité à détecter des tendances ou changements de comportement sur plusieurs années.</li>
-        <li>Malgré un nettoyage soigné (valeurs manquantes, doublons), un risque d'erreurs résiduelles subsiste et peut affecter marginalement les résultats des tests.</li>
-        <li>La présence de clients B2B aux volumes d'achat atypiques peut biaiser les tests de corrélation — je ne peux pas garantir avoir détecté 100 % de ces profils dans le jeu de données.</li>
-        <li>Piste identifiée : la marge par produit n'était pas disponible dans les données fournies, alors qu'elle serait une information cruciale pour compléter l'analyse de performance au-delà du seul chiffre d'affaires.</li>
-      </ul>
+      <p>
+        La marge par produit n'était pas disponible dans les données fournies, alors qu'elle serait une information cruciale pour compléter l'analyse de performance au-delà du seul chiffre d'affaires.</li>
+      Cela rendrait l'analyse plus pertinente et apporterait des éléments indispensables à la prise de décision pour l'avenir de Lapage.
+      </p>
     </section>
 
   </div>
