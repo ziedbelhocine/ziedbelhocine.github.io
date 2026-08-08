@@ -55,7 +55,6 @@
 
       <section class="fiche-section">
         <span class="label">01 — Contexte / besoin métier</span>
-        <h2>De quoi s'agit-il ?</h2>
         <p>
           Mission réalisée pour DWFA (Drinking Water For All), une ONG dont l'ambition est de
           donner accès à l'eau potable à tous. L'association venait de solliciter un
@@ -70,18 +69,22 @@
 
       <section class="fiche-section">
         <span class="label">02 — Données</span>
-        <h2>Sur quoi je me suis appuyé</h2>
         <ul>
           <li><strong>Source :</strong> jeu de données déjà collecté par un data engineer de l'ONG (indicateurs
             eau/santé de type OMS/FAO), accompagné d'un dictionnaire de données.</li>
-          <li><strong>Une réunion de lancement:</strong> Un résumé des attentes et des contraintes du projet.</li>
-          <li><strong>Un brief de mission :</strong>Rappel des objectifs et feuille de route pour la conduite du projet.</li>
+          <li><strong>Variables clés :</strong> population et densité, région, stabilité politique, qualité des services
+            d'accès à l'eau (basique vs qualité), taux de mortalité lié à l'eau insalubre — avec une évolution
+            disponible dans le temps.</li>
+          <li><strong>Structuration :</strong> modèle relationnel en étoile, avec chaque table de faits reliée à des
+            tables de dimension (région, calendrier/année, granularité géographique).</li>
+          <li><strong>Qualité :</strong> vérification systématique que chaque pays est bien rattaché à une région dans
+            la table de dimension, et traitement au cas par cas des valeurs manquantes lorsque c'était pertinent de les
+            renseigner.</li>
         </ul>
       </section>
 
       <section class="fiche-section">
         <span class="label">03 — Démarche</span>
-        <h2>Comment j'ai procédé</h2>
         <ul>
           <li>Cadrage en amont avec le commanditaire (compte-rendu de réunion de lancement) pour définir précisément les
             indicateurs à visualiser par vue, avant toute construction technique.</li>
@@ -89,25 +92,31 @@
             développement du tableau de bord final.</li>
           <li>Choix de l'outil : Power BI, retenu pour sa capacité à centraliser plusieurs sources (fichiers, SQL) et
             diffuser le résultat à un public varié (web, mobile, rapports).</li>
-          <li>Construction d'un modèle de données relationnel en étoile avec des tables de faits et des tables de dimension pour permettre des filtres
+          <li>Construction d'un modèle de données relationnel en étoile avec des tables de faits et des tables de
+            dimension pour permettre des filtres
             croisés (géographiques, temporels, qualitatifs) performants.</li>
           <li>Respect d'une charte imposée : palette de bleus, en cohérence avec le sujet de l'eau, sur l'ensemble des
             visualisations tout en restant accessible au plus grand nombre.</li>
-          <li>Construction de 3 tableaux de bord dédiés pour chaque échelle souhaité (mondial, continental, national) par l'ONG (voir résultats).</li>
+          <li>Construction de 3 tableaux de bord dédiés pour chaque échelle souhaité (mondial, continental, national)
+            par l'ONG (voir résultats).</li>
         </ul>
       </section>
 
       <section class="fiche-section">
         <span class="label">04 — Résultats &amp; impact</span>
-        <h2>Ce que ça a produit</h2>
         <p>
-          Trois tableaux de bord interactifs livrés, chacun modélisé à une echelle différente pour visualiser les domaines d'expertise de
+          Trois tableaux de bord interactifs livrés, chacun modélisé à une echelle différente pour visualiser les
+          domaines d'expertise de
           DWFA. En ce qui concerne les visualisations, mes choix ont été les suivants :
         </p>
         <ul>
-          <li><strong>Création de services :</strong> Un diagramme en barres comparant le % d'accès à l'eau potable et la taux de population urbaine entre chaque région/pays.</li>
-          <li><strong>Modernisation des services :</strong> J'ai choisi une carte à bulles (taille de bulle représentant la taille de la population) colorée en fonction du potentiel d'amélioration des services.</li>
-          <li><strong>Consulting :</strong> Pour ce domaine, j'avais trois variables à analyser. J'ai donc choisi un nuage de points comparant la mortalité à l'accès à l'eau avec une grosseur de point représentant la stabilité politique de la région/du pays.</li>
+          <li><strong>Création de services :</strong> Un diagramme en barres comparant le % d'accès à l'eau potable et
+            la taux de population urbaine entre chaque région/pays.</li>
+          <li><strong>Modernisation des services :</strong> J'ai choisi une carte à bulles (taille de bulle représentant
+            la taille de la population) colorée en fonction du potentiel d'amélioration des services.</li>
+          <li><strong>Consulting :</strong> Pour ce domaine, j'avais trois variables à analyser. J'ai donc choisi un
+            nuage de points comparant la mortalité à l'accès à l'eau avec une grosseur de point représentant la
+            stabilité politique de la région/du pays.</li>
         </ul>
         <p>
           Mise à disposition d'un support d'aide à la décision concret et fondé sur la donnée, permettant à DWFA de
@@ -118,7 +127,6 @@
 
       <section class="fiche-section">
         <span class="label">05 — Limites &amp; pistes</span>
-        <h2>Ce que je ferais différemment</h2>
         <p>
           La principale limite concerne les données elles-mêmes : le taux de mortalité liée à
           l'eau insalubre n'est disponible que pour l'année 2016, ce qui empêche de suivre son

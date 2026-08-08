@@ -1,134 +1,151 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Évolution du profil sociodémographique — DBT/Snowflake — Portfolio Data</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Évolution du profil sociodémographique — DBT/Snowflake — Portfolio Data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header class="site-nav">
-  <div class="wrap">
-    <a class="brand" href="index.html">zied-belhocine.github.io</a>
-    <nav>
-      <a href="index.html#projets">Projets</a>
-      <a href="veille.html">Veille</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-  <div class="fiche-header wrap">
-    <a class="back" href="index.html#projets">← Retour aux projets</a>
-    <h1>Évolution du profil sociodémographique des étudiants Data — Pipeline DBT + Snowflake</h1>
-    <div class="fiche-meta">
-      <span class="tag">DBT</span>
-      <span class="tag">Snowflake</span>
-      <span class="tag">SQL</span>
-      <span class="tag">Data Engineering</span>
-      <span class="tag">RGPD</span>
+  <header class="site-nav">
+    <div class="wrap">
+      <a class="brand" href="index.html">zied-belhocine.github.io</a>
+      <nav>
+        <a href="index.html#projets">Projets</a>
+        <a href="veille.html">Veille</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-<style>
-  .fiche-visual img {
-    max-width: 100%; 
-    height: auto;  
-  }
-</style>
+  <main>
 
-<div class="wrap">
-  <div class="fiche-visual">
-    <img src="static/dbt.png" alt="Capture d'écran de l'application dbt" />
-  </div>
-</div>
+    <div class="fiche-header wrap">
+      <a class="back" href="index.html#projets">← Retour aux projets</a>
+      <h1>Évolution du profil sociodémographique des étudiants Data — Pipeline DBT + Snowflake</h1>
+      <div class="fiche-meta">
+        <span class="tag">DBT</span>
+        <span class="tag">Snowflake</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Data Engineering</span>
+        <span class="tag">RGPD</span>
+      </div>
+    </div>
 
-  <div class="wrap">
+    <style>
+      .fiche-visual img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
 
-    <section class="fiche-section">
-      <span class="label">01 — Contexte / besoin métier</span>
-      <h2>De quoi s'agit-il ?</h2>
-      <p>
-        Mission réalisée pour la direction pédagogique d'OpenClassrooms, qui
-        souhaitait objectiver l'évolution du profil sociodémographique des
-        étudiants inscrits aux parcours Data sur plusieurs années (âge, genre,
-        région), afin d'alimenter sa réflexion stratégique sur l'accessibilité
-        et l'égalité des chances. La commanditaire, Lead Data Analyst, avait
-        besoin d'un pipeline de transformation fiable, documenté et
-        reproductible — pas d'une simple analyse ponctuelle — capable d'être
-        réutilisé dans le temps par l'équipe.
-      </p>
-    </section>
+    <div class="wrap">
+      <div class="fiche-visual">
+        <img src="static/dbt.png" alt="Capture d'écran de l'application dbt" />
+      </div>
+    </div>
 
-    <section class="fiche-section">
-      <span class="label">02 — Données</span>
-      <h2>Sur quoi je me suis appuyé</h2>
-      <ul>
-        <li><strong>Source interne :</strong> données d'inscription des étudiants (identifiant, tranche d'âge, genre déclaré, région, année de début de parcours), chargées dans Snowflake.</li>
-        <li><strong>Source externe :</strong> données de population de l'INSEE (répartition par âge, genre et région), intégrées pour comparer le profil des étudiants à celui de la population française.</li>
-        <li><strong>Contrainte majeure :</strong> Il fallait trouver des données comparables avec celles de la plateforme sur le site de l'INSEE mais pour l'ensemble de la population française.</li>
-      </ul>
-    </section>
+    <div class="wrap">
 
-    <section class="fiche-section">
-      <span class="label">03 — Démarche</span>
-      <h2>Comment j'ai procédé</h2>
-      <p>
-        Construction d'un pipeline de transformation avec DBT sur un entrepôt
-        Snowflake — ma première expérience concrète de data engineering,
-        au-delà de l'analyse pure :
-      </p>
-      <ul>
-        <li>Déclaration des sources de données (étudiants et INSEE) dans des fichiers de configuration <code>sources.yml</code>, avec documentation complète de chaque colonne.</li>
-        <li>Construction de modèles en couches (staging → intermediate → marts) pour nettoyer, harmoniser et agréger les données. Chaque modèle DBT est écrit en SQL et compilé en requêtes exécutées directement sur Snowflake, avec des règles explicites (filtrage des années hors périmètre, valeurs de genre manquantes traitées comme "Unknown" plutôt qu'exclues).</li>
-        <li>Mise en place de tests DBT automatisés à chaque étape : unicité des clés, cohérence des pourcentages calculés, valeurs autorisées sur les catégories (âge, genre, région).</li>
-        <li>Calcul d'un indicateur d'écart (<code>delta_pct</code>) entre la répartition des étudiants et celle de la population INSEE, pour rendre les résultats immédiatement interprétables par un public non technique.</li>
-        <li>Documentation du pipeline pour le rendre traçable et reproductible par l'équipe, sans dépendre de moi pour le relancer.</li>
-      </ul>
-    </section>
+      <section class="fiche-section">
+        <span class="label">01 — Contexte / besoin métier</span>
+        <p>
+          Mission réalisée pour la direction pédagogique d'OpenClassrooms, qui
+          souhaitait objectiver l'évolution du profil sociodémographique des
+          étudiants inscrits aux parcours Data sur plusieurs années (âge, genre,
+          région), afin d'alimenter sa réflexion stratégique sur l'accessibilité
+          et l'égalité des chances. La commanditaire, Lead Data Analyst, avait
+          besoin d'un pipeline de transformation fiable, documenté et
+          reproductible — pas d'une simple analyse ponctuelle — capable d'être
+          réutilisé dans le temps par l'équipe.
+        </p>
+      </section>
 
-    <section class="fiche-section">
-      <span class="label">04 — Résultats &amp; impact</span>
-      <h2>Ce que ça a produit</h2>
-      <p>
-        Le pipeline DBT produit trois tables finales (<code>marts_age</code>,
-        <code>marts_gender</code>, <code>marts_region</code>) comparant chaque
-        année la répartition des étudiants du parcours Data à celle de la
-        population française, sous forme d'écart en points de pourcentage.
-        L'analyse fait ressortir trois tendances stables sur la période étudiée :
-      </p>
-      <ul>
-        <li><strong>Âge :</strong> forte sur-représentation des 25-34 ans chez les étudiants (jusqu'à +17 points vs population INSEE), et sous-représentation marquée des 60 ans et plus (environ -17 à -19 points chaque année).</li>
-        <li><strong>Genre :</strong> les hommes sont nettement sur-représentés (62 à 64 % des étudiants en 2024-2025, contre une population INSEE proche de la parité, ~48/52). La part de genre "Unknown" a fortement diminué au fil du temps, signe d'une meilleure collecte de la donnée déclarative.</li>
-        <li><strong>Géographie :</strong> l'Île-de-France est très largement sur-représentée (+23 à +36 points selon les années), cohérent avec la concentration francilienne des métiers tech/data.</li>
-      </ul>
-      <p>
-        Chaque table est testée automatiquement via DBT (tests d'unicité et de
-        cohérence des pourcentages), garantissant que les chiffres présentés à
-        la direction pédagogique sont fiables et reproductibles à chaque
-        exécution du pipeline.
-      </p>
-    </section>
+      <section class="fiche-section">
+        <span class="label">02 — Données</span>
+        <ul>
+          <li><strong>Source interne :</strong> données d'inscription des étudiants (identifiant, tranche d'âge, genre
+            déclaré, région, année de début de parcours), chargées dans Snowflake.</li>
+          <li><strong>Source externe :</strong> données de population de l'INSEE (répartition par âge, genre et région),
+            intégrées pour comparer le profil des étudiants à celui de la population française.</li>
+          <li><strong>Contrainte majeure :</strong> Il fallait trouver des données comparables avec celles de la
+            plateforme sur le site de l'INSEE mais pour l'ensemble de la population française.</li>
+        </ul>
+      </section>
 
-    <section class="fiche-section">
-      <span class="label">05 — Limites &amp; pistes</span>
-      <h2>Ce que je ferais différemment</h2>
-        <p>Je pourrais essayer de croiser les tendances démographiques avec le taux de réussite du parcours, pour voir si elles corrèlent avec les résultats pédagogiques et pas seulement avec les inscriptions.</p>
-    </section>
-  </div>
+      <section class="fiche-section">
+        <span class="label">03 — Démarche</span>
+        <p>
+          Construction d'un pipeline de transformation avec DBT sur un entrepôt
+          Snowflake — ma première expérience concrète de data engineering,
+          au-delà de l'analyse pure :
+        </p>
+        <ul>
+          <li>Déclaration des sources de données (étudiants et INSEE) dans des fichiers de configuration
+            <code>sources.yml</code>, avec documentation complète de chaque colonne.
+          </li>
+          <li>Construction de modèles en couches (staging → intermediate → marts) pour nettoyer, harmoniser et agréger
+            les données. Chaque modèle DBT est écrit en SQL et compilé en requêtes exécutées directement sur Snowflake,
+            avec des règles explicites (filtrage des années hors périmètre, valeurs de genre manquantes traitées comme
+            "Unknown" plutôt qu'exclues).</li>
+          <li>Mise en place de tests DBT automatisés à chaque étape : unicité des clés, cohérence des pourcentages
+            calculés, valeurs autorisées sur les catégories (âge, genre, région).</li>
+          <li>Calcul d'un indicateur d'écart (<code>delta_pct</code>) entre la répartition des étudiants et celle de la
+            population INSEE, pour rendre les résultats immédiatement interprétables par un public non technique.</li>
+          <li>Documentation du pipeline pour le rendre traçable et reproductible par l'équipe, sans dépendre de moi pour
+            le relancer.</li>
+        </ul>
+      </section>
 
-</main>
+      <section class="fiche-section">
+        <span class="label">04 — Résultats &amp; impact</span>
+        <p>
+          <strong>Déploiement de modèles analytiques :</strong> Le pipeline de transformation des données génère des
+          tables de présentation finale (Data Marts) comparant dynamiquement la sociologie de la cohorte étudiante à
+          celle de la population nationale. Modélisée sous forme d'écarts de représentativité, l'analyse fait ressortir
+          trois tendances structurelles :
+        </p>
+        <ul>
+          <li><strong>Analyse générationnelle :</strong> Mise en évidence d'une très forte polarisation autour de la
+            tranche des jeunes actifs, contrastant avec un déficit sur les profils les plus âgés par
+            rapport à la moyenne démographique globale.</li>
+          <li><strong>Évaluation de la parité :</strong> Identification d'un déséquilibre de genre persistant, illustré
+            par une nette sur-représentation masculine. L'étude longitudinale valide en parallèle une nette amélioration
+            de la qualité de collecte, traduite par la réduction drastique des données déclaratives manquantes au fil du
+            temps.</li>
+          <li><strong>Cartographie géographique :</strong> Constat d'une hyper-concentration des effectifs sur une
+            région, une dynamique corrélée à la centralisation des opportunités
+            professionnelles dans ce secteur.</li>
+        </ul>
+        <p>
+          <strong>Assurance qualité automatisée :</strong> L'intégration de tests systématiques directement au cœur du
+          pipeline (contrôle d'unicité et d'intégrité logique des indicateurs) garantit à la direction pédagogique la
+          mise à disposition de données fiables, traçables et parfaitement reproductibles à chaque itération.
+        </p>
+      </section>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
-  </div>
-</footer>
+      <section class="fiche-section">
+        <span class="label">05 — Limites &amp; pistes</span>
+        <p>Je pourrais essayer de croiser les tendances démographiques avec le taux de réussite du parcours, pour voir
+          si elles corrèlent avec les résultats pédagogiques et pas seulement avec les inscriptions.</p>
+      </section>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
+    </div>
+  </footer>
 
 </body>
+
 </html>

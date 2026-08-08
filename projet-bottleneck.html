@@ -56,7 +56,6 @@
 
       <section class="fiche-section">
         <span class="label">01 — Contexte / besoin métier</span>
-        <h2>De quoi s'agit-il ?</h2>
         <p>
           Mission réalisée pour BottleNeck, marchand de vin, dont les outils de suivi étaient
           encore artisanaux : trois sources de données disjointes (extraction ERP, extraction
@@ -70,20 +69,20 @@
 
       <section class="fiche-section">
         <span class="label">02 — Données</span>
-        <h2>Sur quoi je me suis appuyé</h2>
         <ul>
           <li><strong>Source :</strong> 3 fichiers à rapprocher — export ERP (référence produit, prix, état du stock),
             export du site web (SKU, quantités vendues, description produit), et une table de liaison entre les deux
-            référentiels.</li>
-          <li><strong>Période :</strong> extraction au 31 octobre, ventes couvrant du 1ᵉʳ au 31 octobre.</li>
-          <li><strong>Un notebook initial :</strong> Un notebook Jupyter fourni par le client, avec un squelette de code pour la fusion des tables et le calcul du chiffre d'affaires, mais sans traitement des anomalies ni analyse statistique.</li>
-          <li><strong>Un modèle de présentation :</strong> Un template de présentation fourni par le client, servant de base pour structurer les résultats et les recommandations ainsi que la charte graphique à suivre.</li>
+            référentiels, mise à jour par un stagiaire.</li>
+          <li><strong>Période :</strong> extraction au 31 octobre, ventes couvrant le 1ᵉʳ au 31 octobre.</li>
+          <li><strong>Qualité :</strong> de nombreuses incohérences à traiter avant fusion — doublons sur la colonne de
+            liaison <code>id_web</code> (dus à des valeurs vides comptées comme identiques par défaut), formats de SKU
+            incohérents entre les 3 sources, valeurs manquantes à traiter avant même de pouvoir vérifier les doublons.
+          </li>
         </ul>
       </section>
 
       <section class="fiche-section">
         <span class="label">03 — Démarche</span>
-        <h2>Comment j'ai procédé</h2>
         <ul>
           <li>Analyse exploratoire indépendante de chacune des 3 sources avant fusion, pour identifier les anomalies
             propres à chaque système (erreurs de saisie, de type, de calcul, de jointure).</li>
@@ -103,7 +102,6 @@
 
       <section class="fiche-section">
         <span class="label">04 — Résultats &amp; impact</span>
-        <h2>Ce que ça a produit</h2>
         <ul>
           <li><strong>Analyse du chiffre d'affaires :</strong>Calcul du CA mensuel global et mise en évidence des
             catégories de produits dominant le classement des meilleures ventes.</li>
@@ -127,7 +125,6 @@
 
       <section class="fiche-section">
         <span class="label">05 — Limites &amp; pistes</span>
-        <h2>Ce que je ferais différemment</h2>
         <ul>
           <li>L'analyse porte sur un seul mois de données (octobre) — les catégories identifiées comme "flops"
             nécessitent une observation sur une période plus longue avant d'être confirmées comme telles.</li>

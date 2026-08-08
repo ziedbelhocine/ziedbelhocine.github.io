@@ -1,130 +1,160 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Étude de santé publique — FAO — Portfolio Data</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Étude de santé publique — FAO — Portfolio Data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header class="site-nav">
-  <div class="wrap">
-    <a class="brand" href="index.html">zied-belhocine.github.io</a>
-    <nav>
-      <a href="index.html#projets">Projets</a>
-      <a href="veille.html">Veille</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-  <div class="fiche-header wrap">
-    <a class="back" href="index.html#projets">← Retour aux projets</a>
-    <h1>Étude de santé publique — Sous-nutrition mondiale (FAO)</h1>
-    <div class="fiche-meta">
-      <span class="tag">Python</span>
-      <span class="tag">Pandas</span>
-      <span class="tag">Nettoyage de données</span>
-      <span class="tag">Statistiques descriptives</span>
+  <header class="site-nav">
+    <div class="wrap">
+      <a class="brand" href="index.html">zied-belhocine.github.io</a>
+      <nav>
+        <a href="index.html#projets">Projets</a>
+        <a href="veille.html">Veille</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-<style>
-  .fiche-visual img {
-    max-width: 100%; 
-    height: auto;  
-  }
-</style>
+  <main>
 
-<div class="wrap">
-  <div class="fiche-visual">
-    <img src="static/FAO.png" alt="Capture d'écran de l'application FAO" />
-  </div>
-</div>
+    <div class="fiche-header wrap">
+      <a class="back" href="index.html#projets">← Retour aux projets</a>
+      <h1>Étude de santé publique — Sous-nutrition mondiale (FAO)</h1>
+      <div class="fiche-meta">
+        <span class="tag">Python</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Nettoyage de données</span>
+        <span class="tag">Statistiques descriptives</span>
+      </div>
+    </div>
 
-  <div class="wrap">
+    <style>
+      .fiche-visual img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
 
-    <section class="fiche-section">
-      <span class="label">01 — Contexte / besoin métier</span>
-      <h2>De quoi s'agit-il ?</h2>
-      <p>
-        Mission réalisée en tant que Data Analyst au sein d'une équipe de chercheurs de la
-        FAO (Food and Agriculture Organization de l'ONU), dont l'objectif est de contribuer à
-        un monde libéré de la faim. L'équipe menait une étude d'ampleur sur l'alimentation et
-        la sous-nutrition mondiale, découpée en deux volets temporels : mon prédécesseur
-        avait traité la période 2018 à aujourd'hui, ma mission portait sur la partie
-        historique 2013-2017. L'analyse devait répondre à des questions précises validées en
-        amont avec l'équipe, avec une présentation orale challengée sur la propreté du code,
-        les jointures et le respect du RGPD.
-      </p>
-    </section>
+    <div class="wrap">
+      <div class="fiche-visual">
+        <img src="static/FAO.png" alt="Capture d'écran de l'application FAO" />
+      </div>
+    </div>
 
-    <section class="fiche-section">
-      <span class="label">02 — Données</span>
-      <h2>Sur quoi je me suis appuyé</h2>
-      <ul>
-        <li><strong>Sources :</strong> 4 fichiers FAO — population mondiale, disponibilité alimentaire par pays et produit (15 605 lignes), aide alimentaire internationale par pays, et taux de sous-nutrition par pays (par tranches de 3 ans).</li>
-        <li><strong>Qualité :</strong> unités hétérogènes à harmoniser (population en milliers, quantités alimentaires en milliers de tonnes) ; valeurs non numériques dans la colonne sous-nutrition (ex. "&lt;0.1") nécessitant une conversion forcée ; désynchronisation des noms de pays entre les 4 sources (jusqu'à 64 pays sans correspondance entre <code>dispo_alimentaire</code> et <code>population</code>), résolue par harmonisation manuelle des libellés.</li>
-        <li><strong>Volumétrie finale :</strong> analyse portant sur l'année 2017, couvrant 174 à 203 pays selon les jointures, pour une population mondiale totale de 7,54 milliards de personnes.</li>
-      </ul>
-    </section>
+    <div class="wrap">
 
-    <section class="fiche-section">
-      <span class="label">03 — Démarche</span>
-      <h2>Comment j'ai procédé</h2>
-      <ul>
-        <li>Exploration systématique de chacun des 4 fichiers (dimensions, types, valeurs manquantes) avant toute jointure, avec harmonisation des unités (conversion en kg, population en unités réelles).</li>
-        <li>Détection et résolution méthodique des écarts de nommage entre tables avant chaque jointure, par différence d'ensembles (<code>set()</code>) plutôt que par vérification ligne à ligne — plus rapide et systématique.</li>
-        <li>Choix réfléchi du type de jointure selon la table la plus fiable à chaque cas (jointure à gauche sur la table de référence pour ne pas perdre de données pertinentes).</li>
-        <li>Remplacement des valeurs manquantes par 0 lorsque cela avait un sens métier (ex. disponibilité alimentaire non renseignée), documenté à chaque étape.</li>
-        <li>Analyse statistique descriptive complète : proportions, tops/flops par pays, corrélations (coefficient de Pearson avec p-value) entre aide alimentaire reçue et niveau de sous-nutrition, année par année.</li>
-      </ul>
-    </section>
+      <section class="fiche-section">
+        <span class="label">01 — Contexte / besoin métier</span>
+        <p>
+          Mission réalisée en tant que Data Analyst au sein d'une équipe de chercheurs de la
+          FAO (Food and Agriculture Organization de l'ONU), dont l'objectif est de contribuer à
+          un monde libéré de la faim. L'équipe menait une étude d'ampleur sur l'alimentation et
+          la sous-nutrition mondiale, découpée en deux volets temporels : mon prédécesseur
+          avait traité la période 2018 à aujourd'hui, ma mission portait sur la partie
+          historique 2013-2017. L'analyse devait répondre à des questions précises validées en
+          amont avec l'équipe, avec une présentation orale challengée sur la propreté du code,
+          les jointures et le respect du RGPD.
+        </p>
+      </section>
 
-    <section class="fiche-section">
-      <span class="label">04 — Résultats &amp; impact</span>
-      <h2>Ce que ça a produit</h2>
-      <ul>
-        <li>535,7 millions de personnes en état de sous-nutrition en 2017, soit 7,10 % de la population mondiale.</li>
-        <li>La disponibilité alimentaire mondiale permettrait théoriquement de nourrir 116,93 % de la population ; en ne considérant que les produits végétaux, elle couvrirait encore 96,32 % des besoins — un écart qui interroge sur la répartition plutôt que sur la production.</li>
-        <li>60,78 % de la disponibilité intérieure part in fine dans l'alimentation humaine directe, contre 13,24 % pour l'alimentation animale.</li>
-        <li>Sur les céréales, cette proportion varie fortement par produit : seulement 13,1 % du maïs sert à l'alimentation humaine (57,1 % à l'alimentation animale), contre 79,3 % pour le riz.</li>
-        <li>Haïti et la Corée du Nord affichent les taux de sous-nutrition les plus élevés (près de 50 %) parmi les pays étudiés.</li>
-        <li>La corrélation entre aide alimentaire reçue et niveau de sous-nutrition est positive mais faible (r = 0,267, p &lt; 0,001) sur l'ensemble de la période, et très instable d'une année sur l'autre (de r = 0,380 en 2013 à r = 0,058 en 2014) — l'aide ne semble donc pas allouée de façon strictement proportionnelle au besoin.</li>
-        <li>Analyse de cas ciblée sur la Thaïlande : 83,41 % du manioc produit est exporté plutôt que consommé localement, illustrant comment un pays peut produire en abondance tout en ayant des flux import/export déconnectés des besoins nutritionnels internes.</li>
-        <li>Mise en évidence de pays où les pertes alimentaires par personne en sous-nutrition sont particulièrement élevées (Bulgarie et Costa Rica en tête), signal de gaspillage à fort potentiel d'amélioration.</li>
-      </ul>
-    </section>
+      <section class="fiche-section">
+        <span class="label">02 — Données</span>
+        <ul>
+          <li><strong>Sources :</strong> 4 fichiers FAO — population mondiale, disponibilité alimentaire par pays et
+            produit (15 605 lignes), aide alimentaire internationale par pays, et taux de sous-nutrition par pays (par
+            tranches de 3 ans).</li>
+          <li><strong>Qualité :</strong> unités hétérogènes à harmoniser (population en milliers, quantités alimentaires
+            en milliers de tonnes) ; valeurs non numériques dans la colonne sous-nutrition (ex. "&lt;0.1") nécessitant
+            une conversion forcée ; désynchronisation des noms de pays entre les 4 sources (jusqu'à 64 pays sans
+            correspondance entre <code>dispo_alimentaire</code> et <code>population</code>), résolue par harmonisation
+            manuelle des libellés.</li>
+          <li><strong>Volumétrie finale :</strong> analyse portant sur l'année 2017, couvrant 174 à 203 pays selon les
+            jointures, pour une population mondiale totale de 7,54 milliards de personnes.</li>
+        </ul>
+      </section>
 
-    <section class="fiche-section">
-      <span class="label">05 — Limites &amp; pistes</span>
-      <h2>Ce que je ferais différemment</h2>
-      <p>
-        Ce projet reste l'un de mes tout premiers en analyse de données, et les analyses
-        produites sont restées assez superficielles : essentiellement des tris, sommes et
-        proportions, avec très peu de statistiques descriptives à proprement parler (médiane,
-        écart-type, dispersion par pays, détection d'outliers). Une reprise de ce projet
-        aujourd'hui gagnerait à intégrer ces indicateurs pour mieux caractériser la
-        variabilité entre pays plutôt que de se limiter à des classements de type top 10, et
-        à pousser davantage l'analyse des corrélations au-delà du seul lien aide/sous-nutrition
-        déjà exploré.
-      </p>
-    </section>
+      <section class="fiche-section">
+        <span class="label">03 — Démarche</span>
+        <ul>
+          <li>Exploration systématique de chacun des 4 fichiers (dimensions, types, valeurs manquantes) avant toute
+            jointure, avec harmonisation des unités (conversion en kg, population en unités réelles).</li>
+          <li>Détection et résolution méthodique des écarts de nommage entre tables avant chaque jointure, par
+            différence d'ensembles (<code>set()</code>) plutôt que par vérification ligne à ligne — plus rapide et
+            systématique.</li>
+          <li>Choix réfléchi du type de jointure selon la table la plus fiable à chaque cas (jointure à gauche sur la
+            table de référence pour ne pas perdre de données pertinentes).</li>
+          <li>Remplacement des valeurs manquantes par 0 lorsque cela avait un sens métier (ex. disponibilité alimentaire
+            non renseignée), documenté à chaque étape.</li>
+          <li>Analyse statistique descriptive complète : proportions, tops/flops par pays, corrélations (coefficient de
+            Pearson avec p-value) entre aide alimentaire reçue et niveau de sous-nutrition, année par année.</li>
+        </ul>
+      </section>
 
-  </div>
+      <section class="fiche-section">
+        <span class="label">04 — Résultats &amp; impact</span>
+        <ul>
+          <li><strong>Bilan macro-nutritionnel :</strong> Mise en évidence de la sous-nutrition à
+            l'échelle mondiale, établissant un état des lieux précis du déficit calorique global.</li>
+          <li><strong>Paradoxe de la sécurité alimentaire :</strong> Modélisation de la capacité à nourrir théorique
+            mondiale face aux besoins démographiques réels. L'analyse démontre que l'enjeu réside fondamentalement dans
+            l'équité de la distribution globale plutôt que dans un déficit de production.</li>
+          <li><strong>Analyse de l'allocation des ressources :</strong> Répartition de la disponibilité alimentaire
+            intérieure selon les usages finaux, permettant d'évaluer la proportion réellement affectée à la consommation
+            humaine directe face aux autres filières (notamment l'alimentation animale).</li>
+          <li><strong>Étude de la valorisation par denrée :</strong> De fortes disparités d'usage ont été observées
+            selon
+            le type de ressource agricole, révélant que l'utilisation finale (humaine vs industrielle/animale) est très
+            fortement dépendante de la culture observée.</li>
+          <li><strong>Cartographie des zones critiques :</strong> Identification et classement des territoires
+            présentant les déficits nutritionnels les plus sévères, permettant de prioriser géographiquement les besoins
+            d'intervention.</li>
+          <li><strong>Évaluation de l'efficacité de l'aide internationale :</strong> Analyse statistique des
+            corrélations entre les volumes d'aide reçus et la gravité de la sous-nutrition locale, révélant une
+            allocation des ressources historiquement instable et peu proportionnelle aux besoins réels du terrain.</li>
+          <li><strong>Modélisation des déconnexions commerciales :</strong> Réalisation d'une étude de cas illustrant le
+            paradoxe d'économies agricoles fortement productrices, mais dont les dynamiques d'exportation massive sont
+            décorrélées de la satisfaction des besoins nutritionnels locaux.</li>
+          <li><strong>Détection des gaspillages systémiques (analyse complémentaire) :</strong> Croisement des volumes
+            de pertes alimentaires
+            avec les indices de sous-nutrition, isolant les marchés où la réduction du gaspillage et l'optimisation de
+            la chaîne logistique offriraient le plus fort impact social.</li>
+        </ul>
+      </section>
 
-</main>
+      <section class="fiche-section">
+        <span class="label">05 — Limites &amp; pistes</span>
+        <p>
+          Ce projet reste l'un de mes tout premiers en analyse de données, et les analyses
+          produites sont restées assez superficielles : essentiellement des tris, sommes et
+          proportions, avec très peu de statistiques descriptives à proprement parler (médiane,
+          écart-type, dispersion par pays, détection d'outliers). Une reprise de ce projet
+          aujourd'hui gagnerait à intégrer ces indicateurs pour mieux caractériser la
+          variabilité entre pays plutôt que de se limiter à des classements de type top 10, et
+          à pousser davantage l'analyse des corrélations au-delà du seul lien aide/sous-nutrition
+          déjà exploré.
+        </p>
+      </section>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
-  </div>
-</footer>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
+    </div>
+  </footer>
 
 </body>
+
 </html>

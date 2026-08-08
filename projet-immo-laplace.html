@@ -57,7 +57,6 @@
 
       <section class="fiche-section">
         <span class="label">01 — Contexte / besoin métier</span>
-        <h2>De quoi s'agit-il ?</h2>
         <p>
           Mission réalisée pour Laplace Immo, réseau national d'agences immobilières, dans le
           cadre du projet stratégique interne "DATAImmo" piloté par la CTO. L'objectif : faire
@@ -71,23 +70,23 @@
 
       <section class="fiche-section">
         <span class="label">02 — Données</span>
-        <h2>Sur quoi je me suis appuyé</h2>
         <ul>
           <li><strong>Sources :</strong> 3 jeux de données à intégrer — les Demandes de valeurs foncières (DVF, open
             data), le référentiel géographique français de data.gouv (régions, départements, communes), et les données
             de recensement de population de l'INSEE.</li>
-          <li><strong>Template de dictionnaire de données :</strong> Dictionnaire de données vide à compléter avec les
-            informations spécifiques à chaque variable.</li>
-          <li><strong>Contraintes RGPD :</strong>Demande explicite d'identifier et supprimer les données personnelles
-            sensibles.</li>
-          <li><strong>Un modèle relationnel initial</strong> Le modèle utilisé auparavant par Laplace Immo sans les
-            données géographiques disponilbes pour le projet.</li>
+          <li><strong>Volumétrie :</strong> 34 169 transactions immobilières, réparties sur ~35 000 communes, 109
+            départements et 19 régions.</li>
+          <li><strong>Contrainte RGPD :</strong> le nom de l'acquéreur, présent dans les données sources, a été
+            identifié comme donnée personnelle sont à supprimer — traitement automatisé via Power Query.</li>
+          <li><strong>Clé technique notable :</strong> absence de code département direct dans les données
+            data.gouv/INSEE, et un code département seul insuffisant comme clé unique (plusieurs communes peuvent
+            partager un même code postal) — nécessitant la construction d'une clé composite
+            <code>id_codedep_codecommune</code>.</li>
         </ul>
       </section>
 
       <section class="fiche-section">
         <span class="label">03 — Démarche</span>
-        <h2>Comment j'ai procédé</h2>
         <ul>
           <li>Élaboration d'un dictionnaire de données complet pour les 3 sources (DVF, référentiel géographique,
             données communes), avec pour chaque variable : code, signification, type, longueur, nature et règle de
@@ -106,7 +105,6 @@
 
       <section class="fiche-section">
         <span class="label">04 — Résultats &amp; impact</span>
-        <h2>Ce que ça a produit</h2>
         <p>
           Base de données opérationnelle sur SQLite, avec un jeu de 12 requêtes SQL livrant
           des indicateurs directement exploitables par les agences.
@@ -120,7 +118,6 @@
 
       <section class="fiche-section">
         <span class="label">05 — Limites &amp; pistes</span>
-        <h2>Ce que je ferais différemment</h2>
         <p>
           Le contrôle de la qualité des données (doublons, valeurs manquantes, conformité RGPD)
           a été fait de façon largement manuelle lors de cette mission. Une évolution naturelle

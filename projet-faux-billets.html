@@ -56,7 +56,6 @@
 
       <section class="fiche-section">
         <span class="label">01 — Contexte / besoin métier</span>
-        <h2>De quoi s'agit-il ?</h2>
         <p>
           Mission réalisée pour l'ONCFM (Organisation nationale de lutte contre le
           faux-monnayage), en tant que data analyst senior. L'organisation
@@ -71,17 +70,20 @@
 
       <section class="fiche-section">
         <span class="label">02 — Données</span>
-        <h2>Sur quoi je me suis appuyé</h2>
         <ul>
           <li><strong>Source :</strong> 1 500 billets scannés par l'ONCFM (1 000 vrais, 500 faux), avec 6 mesures
             géométriques par billet (diagonale, hauteurs gauche/droite, marges basse/haute, longueur).</li>
-          <li><strong>Cahier des charges :</strong>Fichier résumant le contexte, le modèle des données(dimensions des
-            billets), les modèles de machine learning préconisés et les critères d'évaluation du projet.</li>
+          <li><strong>Qualité :</strong> 37 valeurs manquantes sur <code>margin_low</code> (2,5 % du jeu), supprimées
+            après analyse — la perte ne déséquilibrait pas la répartition vrais/faux (passage de 66,7/33,3 % à 66,4/33,6
+            %) et aucune variable n'était assez corrélée à <code>margin_low</code> pour l'imputer sans risque.</li>
+          <li><strong>Limite structurelle :</strong> aucune variable seule ne sépare vrais et faux billets
+            (chevauchement important sur tous les boxplots) — la distinction n'est possible qu'en croisant plusieurs
+            dimensions, ce qui justifie le recours au machine learning plutôt qu'à un seuil simple.</li>
+        </ul>
       </section>
 
       <section class="fiche-section">
         <span class="label">03 — Démarche</span>
-        <h2>Comment j'ai procédé</h2>
         <ul>
           <li>Nettoyage des données et détection d'outliers (IQR + Z-score) : nombreux outliers repérés, mais
             volontairement conservés car potentiellement révélateurs de faux billets plutôt qu'à exclure.</li>
@@ -93,7 +95,8 @@
             validation croisée à 5 blocs).</li>
           <li>Réduction du modèle final à 3 variables (<code>margin_low</code>, <code>margin_up</code>,
             <code>length</code>) après avoir vérifié qu'elles suffisaient à obtenir la même performance que les 6
-            variables complètes — modèle plus simple, donc plus robuste et plus rapide.</li>
+            variables complètes — modèle plus simple, donc plus robuste et plus rapide.
+          </li>
           <li>Analyse croisée des erreurs entre les 3 meilleurs modèles pour vérifier s'ils se trompaient sur les mêmes
             billets.</li>
           <li>Livraison finale : script d'entraînement, modèle sauvegardé (<code>model_rf.joblib</code>), et deux
@@ -104,7 +107,6 @@
 
       <section class="fiche-section">
         <span class="label">04 — Résultats &amp; impact</span>
-        <h2>Ce que ça a produit</h2>
         <p>
           Comparaison des 3 modèles les plus robustes sur 200 échantillons :
         </p>
@@ -146,7 +148,6 @@
 
       <section class="fiche-section">
         <span class="label">05 — Limites &amp; pistes</span>
-        <h2>Ce que je ferais différemment</h2>
         <ul>
           <li>Le jeu de données reste modeste (1 500 billets) pour un modèle destiné à un usage à grande échelle — un
             enrichissement continu du jeu d'entraînement avec de nouveaux billets scannés en production permettrait de
@@ -154,7 +155,8 @@
           <li>Les 3 modèles les plus performants (régression logistique, KNN, Random Forest) se trompent souvent sur les
             <strong>mêmes</strong> billets — signe que la difficulté vient de cas limites intrinsèquement ambigus dans
             les données, pas d'une faiblesse propre à un algorithme. Une piste serait d'examiner spécifiquement ces
-            billets mal classés pour comprendre ce qui les rend atypiques.</li>
+            billets mal classés pour comprendre ce qui les rend atypiques.
+          </li>
           <li>L'application actuelle est en ligne de commande (CLI) — l'évaluateur en soutenance a suggéré d'utiliser
             Streamlit pour proposer une interface utilisateur web, plus accessible aux équipes terrain qu'un script CLI
             au quotidien. C'est la prochaine évolution naturelle de l'outil.</li>

@@ -1,136 +1,147 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tableau de bord Power BI — Sanitoral — Portfolio Data</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de bord Power BI — Sanitoral — Portfolio Data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header class="site-nav">
-  <div class="wrap">
-    <a class="brand" href="index.html">zied-belhocine.github.io</a>
-    <nav>
-      <a href="index.html#projets">Projets</a>
-      <a href="veille.html">Veille</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-  <div class="fiche-header wrap">
-    <a class="back" href="index.html#projets">← Retour aux projets</a>
-    <h1>Tableau de bord Power BI — Suivi de projets (Sanitoral)</h1>
-    <div class="fiche-meta">
-      <span class="tag">Power BI</span>
-      <span class="tag">DAX</span>
-      <span class="tag">Power Query</span>
-      <span class="tag">Modélisation de données</span>
-      <span class="tag">Storytelling</span>
+  <header class="site-nav">
+    <div class="wrap">
+      <a class="brand" href="index.html">zied-belhocine.github.io</a>
+      <nav>
+        <a href="index.html#projets">Projets</a>
+        <a href="veille.html">Veille</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-<style>
-  .fiche-visual img {
-    max-width: 100%; 
-    height: auto;  
-  }
-</style>
+  <main>
 
-<div class="wrap">
-  <div class="fiche-visual">
-    <img src="static/powerbi-sanitoral.png" alt="Capture d'écran du tableau de bord Power BI" />
-  </div>
-</div>
+    <div class="fiche-header wrap">
+      <a class="back" href="index.html#projets">← Retour aux projets</a>
+      <h1>Tableau de bord Power BI — Suivi de projets (Sanitoral)</h1>
+      <div class="fiche-meta">
+        <span class="tag">Power BI</span>
+        <span class="tag">DAX</span>
+        <span class="tag">Power Query</span>
+        <span class="tag">Modélisation de données</span>
+        <span class="tag">Storytelling</span>
+      </div>
+    </div>
 
-  <div class="wrap">
+    <style>
+      .fiche-visual img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
 
-    <section class="fiche-section">
-      <span class="label">01 — Contexte / besoin métier</span>
-      <h2>De quoi s'agit-il ?</h2>
-      <p>
-        Mission réalisée en tant que consultant Data Analyst chez ESN Data, déployé chez le
-        client Sanitoral (fabricant international de soins bucco-dentaires). La cheffe de
-        projet PMO avait besoin d'un tableau de bord pour suivre l'avancement des projets et
-        leurs coûts, identifier les retards, et permettre à 3 niveaux de directeurs (Général,
-        Régional, Pays) de piloter les actions correctives — avec une mise à jour
-        hebdomadaire à réaliser en autonomie par les équipes, sans intervention technique de
-        ma part après livraison.
-      </p>
-    </section>
+    <div class="wrap">
+      <div class="fiche-visual">
+        <img src="static/powerbi-sanitoral.png" alt="Capture d'écran du tableau de bord Power BI" />
+      </div>
+    </div>
 
-    <section class="fiche-section">
-      <span class="label">02 — Données</span>
-      <h2>Sur quoi je me suis appuyé</h2>
-      <ul>
-        <li><strong>Source :</strong> export du logiciel de gestion de projets de Sanitoral, couvrant des projets menés entre 2018 et début 2022, avec dictionnaire de données fourni.</li>
-        <li><strong>Préparation :</strong> nettoyage entièrement automatisé via Power Query Editor pour permettre les mises à jour hebdomadaires en autonomie par les équipes, sans reprise manuelle.</li>
-        <li><strong>Modélisation :</strong> simplification du modèle relationnel de 7 tables et 9 relations à seulement 4 tables et 3 relations, pour fiabiliser les calculs croisés et faciliter la maintenance.</li>
-      </ul>
-    </section>
+    <div class="wrap">
 
-    <section class="fiche-section">
-      <span class="label">03 — Démarche</span>
-      <h2>Comment j'ai procédé</h2>
-      <ul>
-        <li>Cadrage du besoin avant toute construction technique : élaboration d'un Product Strategy Canvas formalisant les user stories, validé par la commanditaire avant de commencer le développement — pour éviter l'écueil classique de se précipiter dans l'outil sans avoir compris le besoin.</li>
-        <li>Réalisation d'un mockup ("5 pages pour les dominer tous") pour cadrer la structure finale : une page Alertes globales, une page Coûts, une page Durée, une page Livrables, une page Détail projet.</li>
-        <li>Construction des mesures via DAX pour calculer automatiquement les écarts (coût, durée, livrables) et déclencher des indicateurs d'alerte visuels.</li>
-        <li>Mise en place de rôles Power BI pour que chaque niveau de directeur (Général, Régional, Pays) accède uniquement aux informations le concernant, sans multiplier les pages.</li>
-        <li>Application d'une "technique de l'entonnoir" pour le storytelling final : partir d'une alerte globale au niveau Directeur Général, puis descendre progressivement jusqu'au projet précis en cause au niveau Directeur Pays.</li>
-      </ul>
-    </section>
+      <section class="fiche-section">
+        <span class="label">01 — Contexte / besoin métier</span>
+        <p>
+          Mission réalisée en tant que consultant Data Analyst chez ESN Data, déployé chez le
+          client Sanitoral (fabricant international de soins bucco-dentaires). La cheffe de
+          projet PMO avait besoin d'un tableau de bord pour suivre l'avancement des projets et
+          leurs coûts, identifier les retards, et permettre à 3 niveaux de directeurs (Général,
+          Régional, Pays) de piloter les actions correctives — avec une mise à jour
+          hebdomadaire à réaliser en autonomie par les équipes, sans intervention technique de
+          ma part après livraison.
+        </p>
+      </section>
 
-    <section class="fiche-section">
-      <span class="label">04 — Résultats &amp; impact</span>
-      <h2>Ce que ça a produit</h2>
-      <p>
-        La démonstration du storytelling en entonnoir a permis d'identifier concrètement que
-        la région qui concentre le plus d'alertes coût et d'identifier quels types de projets 
-        sont les plus problématiques. En descendant jusqu'au
-        niveau pays, l'analyse a pu identifier facilement un pays puis un projet à l'origine 
-        de la dérive, et comprendre les causes (retards sur certaines phases marketing, 
-        dépassement du budget alloué à certaines phases techniques).
-      </p>
-      <p>
-        Point positif identifié à l'inverse : la durée des projets est globalement respectée
-        voire meilleure que prévu sur l'ensemble des phases — une bonne pratique à maintenir plutôt qu'un
-        axe de correction.
-      </p>
-      <p>
-        Cela a permis de fournir des axes stratégiques claires pour les directeurs, et de mettre en 
-        place des actions correctives concrètes ciblées sur les projets problématiques.
-      </p>
-    </section>
+      <section class="fiche-section">
+        <span class="label">02 — Données</span>
+        <ul>
+          <li><strong>Source :</strong> export du logiciel de gestion de projets de Sanitoral, couvrant des projets
+            menés entre 2018 et début 2022, avec dictionnaire de données fourni.</li>
+          <li><strong>Préparation :</strong> nettoyage entièrement automatisé via Power Query Editor pour permettre les
+            mises à jour hebdomadaires en autonomie par les équipes, sans reprise manuelle.</li>
+          <li><strong>Modélisation :</strong> simplification du modèle relationnel de 7 tables et 9 relations à
+            seulement 4 tables et 3 relations, pour fiabiliser les calculs croisés et faciliter la maintenance.</li>
+        </ul>
+      </section>
 
-    <section class="fiche-section">
-      <span class="label">05 — Limites &amp; pistes</span>
-      <h2>Ce que je ferais différemment</h2>
-      <p>
-        Avec le recul, le tableau de bord est trop exhaustif : chaque page cherche à tout
-        montrer (KPIs, graphiques, tableaux détaillés, cartes) au détriment de l'ergonomie,
-        du design et de la lisibilité immédiate pour des directeurs pressés. Une prochaine
-        itération viserait à alléger chaque page — moins d'éléments par écran, une hiérarchie
-        visuelle plus marquée entre l'information clé et le détail secondaire — pour rendre
-        le dashboard plus digeste au premier coup d'œil, quitte à répartir certains éléments
-        sur des pages supplémentaires plutôt que de tout concentrer.
-      </p>
-    </section>
+      <section class="fiche-section">
+        <span class="label">03 — Démarche</span>
+        <ul>
+          <li>Élaboration d'un Product Strategy Canvas
+            formalisant les user stories, validé par la commanditaire avant de commencer le développement — pour éviter
+            l'écueil classique de se précipiter dans l'outil sans avoir compris le besoin.</li>
+          <li>Réalisation d'un mockup ("5 pages pour les dominer tous") pour cadrer la structure finale : une page
+            Alertes globales, une page Coûts, une page Durée, une page Livrables, une page Détail projet.</li>
+          <li>Construction des mesures via DAX pour calculer automatiquement les écarts (coût, durée, livrables) et
+            déclencher des indicateurs d'alerte visuels.</li>
+          <li>Mise en place de rôles Power BI pour que chaque niveau de directeur (Général, Régional, Pays) accède
+            uniquement aux informations le concernant, sans multiplier les pages.</li>
+          <li>Application d'une "technique de l'entonnoir" pour le storytelling final : partir d'une alerte globale au
+            niveau Directeur Général, puis descendre progressivement jusqu'au projet précis en cause au niveau Directeur
+            Pays.</li>
+        </ul>
+      </section>
 
-  </div>
+      <section class="fiche-section">
+        <span class="label">04 — Résultats &amp; impact</span>
+        <p>
+          <strong>Analyse de performance en entonnoir :</strong> L'application d'une méthodologie d'analyse Top-Down a
+          permis de localiser précisément les zones géographiques et les
+          typologies de projets concentrant les anomalies de coûts. Cette approche granulaire a permis
+          de détecter des dérives jusqu'à l'échelle du projet individuel, mettant en lumière les causes profondes liées
+          aux dépassements budgétaires et aux décalages opérationnels sur des phases spécifiques.
+        </p>
+        <p>
+          <strong>Évaluation de l'efficacité temporelle :</strong> Mise en évidence d'une maîtrise globale des délais
+          d'exécution. L'étude a démontré que les plannings étaient respectés, voire optimisés, sur l'ensemble du cycle
+          de vie des projets, permettant d'identifier et de valider les bonnes pratiques existantes à pérenniser plutôt
+          qu'à corriger.
+        </p>
+        <p>
+          <strong>Pilotage et aide à la décision :</strong> Fourniture d'une feuille de route claire et actionnable à
+          destination de la direction. Cette démarche a facilité l'orientation stratégique et vise le déploiement
+          immédiat d'actions correctives ciblées, spécifiquement calibrées pour redresser les périmètres en difficulté.
+        </p>
+      </section>
 
-</main>
+      <section class="fiche-section">
+        <span class="label">05 — Limites &amp; pistes</span>
+        <p>
+          Avec le recul, le tableau de bord est trop exhaustif : chaque page cherche à tout
+          montrer (KPIs, graphiques, tableaux détaillés, cartes) au détriment de l'ergonomie,
+          du design et de la lisibilité immédiate pour des directeurs pressés. Une prochaine
+          itération viserait à alléger chaque page — moins d'éléments par écran, une hiérarchie
+          visuelle plus marquée entre l'information clé et le détail secondaire — pour rendre
+          le dashboard plus digeste au premier coup d'œil, quitte à répartir certains éléments
+          sur des pages supplémentaires plutôt que de tout concentrer.
+        </p>
+      </section>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
-  </div>
-</footer>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
+    </div>
+  </footer>
 
 </body>
+
 </html>
