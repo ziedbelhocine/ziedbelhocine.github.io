@@ -1,129 +1,157 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Analysez les ventes d'une librairie — Portfolio Data</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analysez les ventes d'une librairie — Portfolio Data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header class="site-nav">
-  <div class="wrap">
-    <a class="brand" href="index.html">zied-belhocine.github.io</a>
-    <nav>
-      <a href="index.html#projets">Projets</a>
-      <a href="veille.html">Veille</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-  <div class="fiche-header wrap">
-    <a class="back" href="index.html#projets">← Retour aux projets</a>
-    <h1>Analysez les ventes d'une librairie — Lapage (indicateurs &amp; comportement client)</h1>
-    <div class="fiche-meta">
-      <span class="tag">Python</span>
-      <span class="tag">Statistiques inférentielles</span>
-      <span class="tag">Spearman</span>
-      <span class="tag">ANOVA</span>
-      <span class="tag">Chi²</span>
+  <header class="site-nav">
+    <div class="wrap">
+      <a class="brand" href="index.html">zied-belhocine.github.io</a>
+      <nav>
+        <a href="index.html#projets">Projets</a>
+        <a href="veille.html">Veille</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-<style>
-  .fiche-visual img {
-    max-width: 100%; 
-    height: auto;  
-  }
-</style>
+  <main>
 
-<div class="wrap">
-  <div class="fiche-visual">
-    <img src="static/lapage.png" alt="Capture d'écran de l'application Lapage" />
-  </div>
-</div>
+    <div class="fiche-header wrap">
+      <a class="back" href="index.html#projets">← Retour aux projets</a>
+      <h1>Analysez les ventes d'une librairie — Lapage (indicateurs &amp; comportement client)</h1>
+      <div class="fiche-meta">
+        <span class="tag">Python</span>
+        <span class="tag">Statistiques inférentielles</span>
+        <span class="tag">Spearman</span>
+        <span class="tag">ANOVA</span>
+        <span class="tag">Chi²</span>
+      </div>
+    </div>
 
-  <div class="wrap">
+    <style>
+      .fiche-visual img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
 
-    <section class="fiche-section">
-      <span class="label">01 — Contexte / besoin métier</span>
-      <h2>De quoi s'agit-il ?</h2>
-      <p>
-        Mission réalisée pour Lapage, librairie historiquement physique ayant ouvert son site
-        de vente en ligne il y a 2 ans. La responsable Marketing (Annabelle) et la Business
-        Intelligence Analyst (Julie) avaient besoin d'un état des lieux complet de l'activité
-        pour orienter les décisions à venir : évolutions d'offres, ajustements de prix,
-        ciblage clientèle. L'analyse devait couvrir deux volets — les indicateurs de vente
-        globaux, et une analyse fine du comportement client en ligne, comparable à la
-        connaissance déjà acquise sur les points de vente physiques. Restitution attendue en
-        15 minutes devant le comité de direction (CODIR), avec une posture de conseil
-        stratégique plutôt qu'un rapport technique.
-      </p>
-    </section>
+    <div class="wrap">
+      <div class="fiche-visual">
+        <img src="static/lapage.png" alt="Capture d'écran de l'application Lapage" />
+      </div>
+    </div>
 
-    <section class="fiche-section">
-      <span class="label">02 — Données</span>
-      <h2>Sur quoi je me suis appuyé</h2>
-      <ul>
-        <li><strong>Source :</strong> 3 fichiers fournis par l'entreprise — clients, produits, transactions — déjà nettoyés en amont, mais avec vérification et traitement complémentaire des valeurs manquantes et doublons de mon côté.</li>
-        <li><strong>Volumétrie :</strong> historique des ventes en ligne depuis l'ouverture du site, pour un chiffre d'affaires cumulé de 11,8 M€.</li>
-        <li><strong>Limite connue dès le départ :</strong> les données clients ne couvrent que la période depuis 2021, insuffisante pour capter des tendances de comportement sur le très long terme.</li>
-      </ul>
-    </section>
+    <div class="wrap">
 
-    <section class="fiche-section">
-      <span class="label">03 — Démarche</span>
-      <h2>Comment j'ai procédé</h2>
-      <ul>
-        <li>Calcul des indicateurs clés de vente (CA total, répartition par catégorie de produits, top/flop produits) et suivi du chiffre d'affaires via une moyenne mobile mensuelle pour lisser les variations et faire ressortir la tendance de fond.</li>
-        <li>Segmentation de la clientèle : détection d'une clientèle B2B minoritaire en nombre (4 clients) mais représentant à elle seule 7,43 % du CA total (~900 k€), avec un comportement d'achat régulier et diversifié — un profil suffisamment atypique pour biaiser les analyses si non isolé.</li>
-        <li>Analyse de corrélation systématique entre profil client (âge, genre) et comportement d'achat (dépense totale, fréquence, taille du panier, catégories achetées), avec sélection rigoureuse du test statistique adapté à chaque cas :
-          <ul>
-            <li>Test de normalité (Shapiro-Wilk) systématique avant de choisir entre Pearson et Spearman.</li>
-            <li>Corrélation de Spearman (non paramétrique) pour âge vs dépenses, âge vs fréquence d'achat, âge vs taille de panier — les variables ne suivant pas une loi normale.</li>
-            <li>ANOVA pour comparer les moyennes de dépense, fréquence et panier entre catégories d'âge.</li>
-            <li>Test du Chi² pour la relation entre âge et catégorie de produits achetés, et entre genre et catégories de livres.</li>
-          </ul>
-        </li>
-      </ul>
-    </section>
+      <section class="fiche-section">
+        <span class="label">01 — Contexte / besoin métier</span>
+        <h2>De quoi s'agit-il ?</h2>
+        <p>
+          Mission réalisée pour Lapage, librairie historiquement physique ayant ouvert son site
+          de vente en ligne il y a 2 ans. La responsable Marketing (Annabelle) et la Business
+          Intelligence Analyst (Julie) avaient besoin d'un état des lieux complet de l'activité
+          pour orienter les décisions à venir : évolutions d'offres, ajustements de prix,
+          ciblage clientèle. L'analyse devait couvrir deux volets — les indicateurs de vente
+          globaux, et une analyse fine du comportement client en ligne, comparable à la
+          connaissance déjà acquise sur les points de vente physiques. Restitution attendue en
+          comité de direction (CODIR), avec une posture de conseil
+          stratégique plutôt qu'un rapport technique.
+        </p>
+      </section>
 
-    <section class="fiche-section">
-      <span class="label">04 — Résultats &amp; impact</span>
-      <h2>Ce que ça a produit</h2>
-      <ul>
-        <li>Chiffre d'affaires cumulé de 11,8 M€ depuis l'ouverture du site, avec une tendance suivie via moyenne mobile mensuelle.</li>
-        <li>Le genre n'a pas d'impact pratique sur les catégories de livres achetées : une relation existe statistiquement, mais à une échelle trop faible pour être exploitable commercialement.</li>
-        <li>Plus les clients sont âgés, moins ils dépensent en moyenne — mais la relation entre âge et fréquence d'achat est plus complexe qu'un simple lien linéaire.</li>
-        <li>Le test du Chi² a confirmé une dépendance très forte et statistiquement significative (p &lt; 0,05) entre l'âge des clients et la catégorie de livres achetée, validant des préférences marquées par tranche d'âge.</li>
-        <li>Deux tranches d'âge se distinguent par un panier moyen nettement supérieur aux autres.</li>
-        <li>Recommandations livrées au CODIR, hiérarchisées court/moyen/long terme : fidéliser en priorité les 19-50 ans (cœur de clientèle), structurer une offre dédiée aux clients B2B identifiés, développer la saisonnalité, stimuler la fréquence d'achat des plus jeunes via des offres ciblées sur leurs catégories préférées, et améliorer l'accessibilité du site pour augmenter le panier moyen des clients plus âgés.</li>
-      </ul>
-    </section>
+      <section class="fiche-section">
+        <span class="label">02 — Données</span>
+        <h2>Sur quoi je me suis appuyé</h2>
+        <ul>
+          <li><strong>Source :</strong> 3 fichiers fournis par l'entreprise — clients, produits, transactions — déjà
+            nettoyés en amont, mais avec vérification et traitement complémentaire des valeurs manquantes et doublons de
+            mon côté.</li>
+          <li><strong>Brief de l'analyse :</strong>Résumé du brief demandant les indicateurs attendus</li>
+          <li><strong>Suite de messages :</strong> Capture d'une conversation présentant les différentes analyses
+            bivariées attendues dans l'analyse.</li>
+        </ul>
+      </section>
 
-    <section class="fiche-section">
-      <span class="label">05 — Limites &amp; pistes</span>
-      <h2>Ce que je ferais différemment</h2>
-      <p>
-        La marge par produit n'était pas disponible dans les données fournies, alors qu'elle serait une information cruciale pour compléter l'analyse de performance au-delà du seul chiffre d'affaires.</li>
-      Cela rendrait l'analyse plus pertinente et apporterait des éléments indispensables à la prise de décision pour l'avenir de Lapage.
-      </p>
-    </section>
+      <section class="fiche-section">
+        <span class="label">03 — Démarche</span>
+        <h2>Comment j'ai procédé</h2>
+        <ul>
+          <li>Calcul des indicateurs clés de vente (CA total, répartition par catégorie de produits, top/flop produits)
+            et suivi du chiffre d'affaires via une moyenne mobile mensuelle pour lisser les variations et faire
+            ressortir la tendance de fond.</li>
+          <li>Segmentation de la clientèle : détection d'une clientèle B2B minoritaire en nombre mais
+            représentant une partie non négligeable du CA total, avec un comportement d'achat régulier et diversifié
+            — un profil suffisamment atypique pour biaiser les analyses si non isolé.</li>
+          <li>Analyse de corrélation systématique entre profil client (âge, genre) et comportement d'achat (dépense
+            totale, fréquence, taille du panier, catégories achetées), avec sélection rigoureuse du test statistique
+            adapté à chaque cas :
+            <ul>
+              <li>Test de normalité (Shapiro-Wilk) systématique avant de choisir entre Pearson et Spearman.</li>
+              <li>Corrélation de Spearman (non paramétrique) pour âge vs dépenses, âge vs fréquence d'achat, âge vs
+                taille de panier — les variables ne suivant pas une loi normale.</li>
+              <li>ANOVA pour comparer les moyennes de dépense, fréquence et panier entre catégories d'âge.</li>
+              <li>Test du Chi² pour la relation entre âge et catégorie de produits achetés, et entre genre et catégories
+                de livres.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
 
-  </div>
+      <section class="fiche-section">
+        <span class="label">04 — Résultats &amp; impact</span>
+        <h2>Ce que ça a produit</h2>
+        <ul>
+          <li><strong>Analyse de l'historique de chiffre d'affaires :</strong> Évaluation des revenus depuis le
+            lancement de la plateforme et modélisation de la tendance de fond à l'aide d'une moyenne mobile mensuelle.
+          </li>
+          <li><strong>Analyse démographique par genre :</strong> Évaluation de l'impact du genre sur le comportement
+            d'achat, démontrant l'absence de levier commercial malgré l'existence d'une corrélation
+            statistique.</li>
+          <li><strong>Étude de l'âge vs valeur client :</strong> Caractérisation de la relation complexe et
+            non linéaire entre l'âge des acheteurs, leur niveau de dépense et leur fréquence d'achat.</li>
+          <li><strong>Validation statistique des préférences :</strong> Réalisation de tests de dépendance (Chi²)
+            confirmant une relation statistiquement significative entre les tranches d'âge et les catégories de produits
+            plébiscitées.</li>
+          <li><strong>Identification des segments à forte valeur :</strong> Isolement de groupes démographiques
+            spécifiques se distinguant par un panier moyen nettement supérieur à la moyenne globale.</li>
+          <li><strong>Feuille de route stratégique pour le CODIR :</strong> Livraison de recommandations hiérarchisées
+            (court, moyen et long terme) visant à fidéliser le cœur de clientèle, structurer une offre B2B dédiée,
+            exploiter la saisonnalité, stimuler le réachat chez les plus jeunes et optimiser l'expérience utilisateur
+            pour les clients plus âgés.</li>
+        </ul>
+      </section>
+      <section class="fiche-section">
+        <span class="label">05 — Limites &amp; pistes</span>
+        <h2>Ce que je ferais différemment</h2>
+        <p>
+          La marge par produit n'était pas disponible dans les données fournies, alors qu'elle serait une information
+          cruciale pour compléter l'analyse de performance au-delà du seul chiffre d'affaires.</li>
+          Cela rendrait l'analyse plus pertinente et apporterait des éléments indispensables à la prise de décision pour
+          l'avenir de Lapage.
+        </p>
+      </section>
 
-</main>
+    </div>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
-  </div>
-</footer>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Zied Belhocine — Data Analyst · <a href="index.html#projets">← Tous les projets</a></p>
+    </div>
+  </footer>
 
 </body>
+
 </html>
